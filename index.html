@@ -1,0 +1,3418 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>NetWorth — Source Code</title>
+    <style>
+    :root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--br:#30363d;--tx:#e6edf3;--mu:#7d8590;--pr:#58a6ff;--gn:#3fb950;--pu:#bc8cff;--or:#ffa657;--sw:268px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;display:flex;height:100vh;overflow:hidden}
+    #sb{width:var(--sw);min-width:var(--sw);background:var(--bg2);border-right:1px solid var(--br);display:flex;flex-direction:column;overflow:hidden}
+    #sbh{padding:14px 14px 10px;border-bottom:1px solid var(--br)}
+    #sbh h1{font-size:14px;font-weight:700}
+    #sbh p{font-size:11px;color:var(--mu);margin-top:2px}
+    #srch{margin:8px 10px;padding:6px 10px;background:var(--bg3);border:1px solid var(--br);border-radius:6px;color:var(--tx);font-size:12px;width:calc(100% - 20px);outline:none}
+    #srch:focus{border-color:var(--pr)}
+    #nav{overflow-y:auto;flex:1;padding:6px 0 20px}
+    .ng{margin-bottom:4px}
+    .ngl{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px 3px}
+    .ni{display:flex;justify-content:space-between;align-items:center;padding:5px 12px;font-size:12px;color:var(--tx);text-decoration:none;border-radius:4px;margin:1px 6px;transition:background .1s;cursor:pointer}
+    .ni:hover{background:var(--bg3)}
+    .ni.active{background:rgba(88,166,255,.12);color:var(--pr);font-weight:600}
+    .lc{font-size:10px;color:var(--mu)}
+    #main{flex:1;overflow-y:auto}
+    #banner{background:linear-gradient(160deg,#0d1117,#161b22);border-bottom:1px solid var(--br);padding:36px 28px 28px;text-align:center}
+    #banner h2{font-size:24px;font-weight:800}
+    #banner p{font-size:12px;color:var(--mu);margin-top:6px}
+    .badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .b{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid}
+    .b1{background:rgba(88,166,255,.1);border-color:rgba(88,166,255,.3);color:var(--pr)}
+    .b2{background:rgba(63,185,80,.1);border-color:rgba(63,185,80,.3);color:var(--gn)}
+    .b3{background:rgba(188,140,255,.1);border-color:rgba(188,140,255,.3);color:var(--pu)}
+    .b4{background:rgba(255,166,87,.1);border-color:rgba(255,166,87,.3);color:var(--or)}
+    .fs{border-bottom:1px solid var(--br)}
+    .fh{position:sticky;top:0;z-index:10;background:var(--bg2);border-bottom:1px solid var(--br);padding:8px 18px;display:flex;align-items:center;gap:10px}
+    .fp{font-family:'SF Mono',Consolas,monospace;font-size:13px;color:var(--pr);font-weight:600;flex:1}
+    .fm{font-size:11px;color:var(--mu)}
+    .cb{background:var(--bg3);border:1px solid var(--br);color:var(--tx);font-size:11px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .15s}
+    .cb:hover{background:var(--pr);color:#fff;border-color:var(--pr)}
+    .cb.ok{background:var(--gn);border-color:var(--gn);color:#fff}
+    .pre{background:var(--bg);overflow-x:auto;padding:0;counter-reset:ln;font-family:'SF Mono','Cascadia Code',Consolas,monospace;font-size:12.5px;line-height:1.65;tab-size:2}
+    .pre code{display:block;padding:14px 0;white-space:pre}
+    .ln{display:block;padding:0 18px 0 56px;position:relative;counter-increment:ln}
+    .ln::before{content:counter(ln);position:absolute;left:0;width:44px;text-align:right;color:#3c434d;font-size:11px;user-select:none;padding-right:14px}
+    .ln:hover{background:rgba(255,255,255,.025)}
+    ::-webkit-scrollbar{width:6px;height:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--br);border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--mu)}
+    </style>
+    </head>
+    <body>
+    <div id="sb">
+    <div id="sbh">
+      <h1>🏦 NetWorth</h1>
+      <p>29 files · React + Express + PostgreSQL</p>
+    </div>
+    <input id="srch" type="search" placeholder="Filter files…" oninput="flt(this.value)"/>
+    <nav id="nav"><div class="ng"><div class="ngl">📦 shared</div><a class="ni" href="#f0" data-id="f0">schema.ts <span class="lc">98L</span></a><a class="ni" href="#f1" data-id="f1">routes.ts <span class="lc">199L</span></a></div><div class="ng"><div class="ngl">🖥️ server</div><a class="ni" href="#f2" data-id="f2">db.ts <span class="lc">15L</span></a><a class="ni" href="#f3" data-id="f3">auth.ts <span class="lc">133L</span></a><a class="ni" href="#f4" data-id="f4">storage.ts <span class="lc">127L</span></a><a class="ni" href="#f5" data-id="f5">routes.ts <span class="lc">198L</span></a><a class="ni" href="#f6" data-id="f6">index.ts <span class="lc">104L</span></a></div><div class="ng"><div class="ngl">⚛️ client/src (root)</div><a class="ni" href="#f7" data-id="f7">main.tsx <span class="lc">6L</span></a><a class="ni" href="#f8" data-id="f8">App.tsx <span class="lc">73L</span></a><a class="ni" href="#f9" data-id="f9">index.css <span class="lc">73L</span></a></div><div class="ng"><div class="ngl">🔧 lib</div><a class="ni" href="#f10" data-id="f10">queryClient.ts <span class="lc">58L</span></a><a class="ni" href="#f11" data-id="f11">utils.ts <span class="lc">7L</span></a></div><div class="ng"><div class="ngl">🪝 hooks</div><a class="ni" href="#f12" data-id="f12">use-auth.ts <span class="lc">86L</span></a><a class="ni" href="#f13" data-id="f13">use-dashboard.ts <span class="lc">14L</span></a><a class="ni" href="#f14" data-id="f14">use-assets.ts <span class="lc">75L</span></a><a class="ni" href="#f15" data-id="f15">use-liabilities.ts <span class="lc">75L</span></a><a class="ni" href="#f16" data-id="f16">use-transactions.ts <span class="lc">53L</span></a></div><div class="ng"><div class="ngl">🧩 components</div><a class="ni" href="#f17" data-id="f17">BottomNav.tsx <span class="lc">45L</span></a><a class="ni" href="#f18" data-id="f18">PageHeader.tsx <span class="lc">24L</span></a><a class="ni" href="#f19" data-id="f19">CreateAssetDialog.tsx <span class="lc">194L</span></a><a class="ni" href="#f20" data-id="f20">CreateLiabilityDialog.tsx <span class="lc">189L</span></a><a class="ni" href="#f21" data-id="f21">CreateTransactionDialog.tsx <span class="lc">173L</span></a></div><div class="ng"><div class="ngl">📄 pages</div><a class="ni" href="#f22" data-id="f22">Auth.tsx <span class="lc">141L</span></a><a class="ni" href="#f23" data-id="f23">Dashboard.tsx <span class="lc">221L</span></a><a class="ni" href="#f24" data-id="f24">Assets.tsx <span class="lc">94L</span></a><a class="ni" href="#f25" data-id="f25">Liabilities.tsx <span class="lc">111L</span></a><a class="ni" href="#f26" data-id="f26">Transactions.tsx <span class="lc">191L</span></a><a class="ni" href="#f27" data-id="f27">Reports.tsx <span class="lc">213L</span></a><a class="ni" href="#f28" data-id="f28">Settings.tsx <span class="lc">120L</span></a></div></nav>
+    </div>
+    <div id="main">
+    <div id="banner">
+      <h2>NetWorth — Source Code</h2>
+      <p>Full-stack Wealth Tracker · TypeScript · React 18 · Drizzle ORM · Tailwind</p>
+      <div class="badges">
+        <span class="b b1">TypeScript</span><span class="b b2">React 18</span><span class="b b3">Drizzle ORM</span>
+        <span class="b b4">Express</span><span class="b b1">Tailwind CSS</span><span class="b b2">Zod</span>
+        <span class="b b3">Recharts</span><span class="b b4">Framer Motion</span>
+      </div>
+    </div>
+    
+    <section class="fs" id="f0">
+    <div class="fh">
+      <div class="fp">shared/schema.ts</div>
+      <div class="fm">98 lines · typescript</div>
+      <button class="cb" onclick="cp('f0')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f0-c">import { pgTable, text, serial, numeric, timestamp, integer, boolean } from &quot;drizzle-orm/pg-core&quot;;
+import { createInsertSchema } from &quot;drizzle-zod&quot;;
+import { z } from &quot;zod&quot;;
+
+// === TABLE DEFINITIONS ===
+
+export const users = pgTable(&quot;users&quot;, {
+  id: serial(&quot;id&quot;).primaryKey(),
+  username: text(&quot;username&quot;).notNull().unique(), // Used for email in this app
+  password: text(&quot;password&quot;).notNull(),
+  name: text(&quot;name&quot;).notNull(),
+  preferredCurrency: text(&quot;preferred_currency&quot;).default(&quot;INR&quot;),
+  exchangeRate: numeric(&quot;exchange_rate&quot;).default(&quot;1.0&quot;), // Base (INR) to Secondary (AED) or vice-versa
+});
+
+export const assets = pgTable(&quot;assets&quot;, {
+  id: serial(&quot;id&quot;).primaryKey(),
+  userId: integer(&quot;user_id&quot;).notNull(),
+  type: text(&quot;type&quot;).notNull(), // 'BANK', 'GOLD', 'CASH', 'STOCK', 'OTHER'
+  name: text(&quot;name&quot;).notNull(),
+  value: numeric(&quot;value&quot;).notNull(),
+  currency: text(&quot;currency&quot;).default(&quot;INR&quot;),
+  // Gold specific
+  weight: numeric(&quot;weight&quot;), // in grams
+  purchaseRate: numeric(&quot;purchase_rate&quot;), // Rate per gram/unit at purchase
+});
+
+export const liabilities = pgTable(&quot;liabilities&quot;, {
+  id: serial(&quot;id&quot;).primaryKey(),
+  userId: integer(&quot;user_id&quot;).notNull(),
+  type: text(&quot;type&quot;).notNull(), // 'CREDIT_CARD', 'LOAN', 'OTHER'
+  name: text(&quot;name&quot;).notNull(),
+  outstandingAmount: numeric(&quot;outstanding_amount&quot;).notNull(),
+  currency: text(&quot;currency&quot;).default(&quot;INR&quot;),
+  // Credit Card / Loan specific
+  totalLimit: numeric(&quot;total_limit&quot;), // Credit limit
+  emi: numeric(&quot;emi&quot;), // Monthly installment
+});
+
+export const transactions = pgTable(&quot;transactions&quot;, {
+  id: serial(&quot;id&quot;).primaryKey(),
+  userId: integer(&quot;user_id&quot;).notNull(),
+  date: timestamp(&quot;date&quot;).defaultNow(),
+  amount: numeric(&quot;amount&quot;).notNull(),
+  type: text(&quot;type&quot;).notNull(), // 'INCOME', 'EXPENSE'
+  category: text(&quot;category&quot;).notNull(),
+  description: text(&quot;description&quot;),
+});
+
+// === SCHEMA DEFINITIONS ===
+
+export const insertUserSchema = createInsertSchema(users).omit({ id: true });
+export const insertAssetSchema = createInsertSchema(assets).omit({ id: true, userId: true });
+export const insertLiabilitySchema = createInsertSchema(liabilities).omit({ id: true, userId: true });
+export const insertTransactionSchema = createInsertSchema(transactions).omit({ id: true, userId: true, date: true });
+
+// === TYPES ===
+
+export type User = typeof users.$inferSelect;
+export type InsertUser = z.infer&lt;typeof insertUserSchema&gt;;
+
+export type Asset = typeof assets.$inferSelect;
+export type InsertAsset = z.infer&lt;typeof insertAssetSchema&gt;;
+
+export type Liability = typeof liabilities.$inferSelect;
+export type InsertLiability = z.infer&lt;typeof insertLiabilitySchema&gt;;
+
+export type Transaction = typeof transactions.$inferSelect;
+export type InsertTransaction = z.infer&lt;typeof insertTransactionSchema&gt;;
+
+// Request Types
+export type CreateAssetRequest = InsertAsset;
+export type UpdateAssetRequest = Partial&lt;InsertAsset&gt;;
+
+export type CreateLiabilityRequest = InsertLiability;
+export type UpdateLiabilityRequest = Partial&lt;InsertLiability&gt;;
+
+export type CreateTransactionRequest = InsertTransaction &amp; { date?: string };
+export type UpdateTransactionRequest = Partial&lt;CreateTransactionRequest&gt;;
+
+// Dashboard / Report Types
+export interface DashboardSummary {
+  totalAssets: number;
+  totalLiabilities: number;
+  netWorth: number;
+  currency: string;
+  goldMetrics?: {
+    totalWeight: number;
+    currentValue: number;
+    investmentValue: number;
+    pl: number;
+  };
+}
+
+export interface AuthResponse {
+  user: User;
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f1">
+    <div class="fh">
+      <div class="fp">shared/routes.ts</div>
+      <div class="fm">199 lines · typescript</div>
+      <button class="cb" onclick="cp('f1')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f1-c">import { z } from 'zod';
+import { 
+  insertUserSchema, 
+  insertAssetSchema, 
+  insertLiabilitySchema, 
+  insertTransactionSchema,
+  users,
+  assets,
+  liabilities,
+  transactions
+} from './schema';
+
+// Error Schemas
+export const errorSchemas = {
+  validation: z.object({
+    message: z.string(),
+    field: z.string().optional(),
+  }),
+  notFound: z.object({
+    message: z.string(),
+  }),
+  internal: z.object({
+    message: z.string(),
+  }),
+  unauthorized: z.object({
+    message: z.string(),
+  })
+};
+
+// API Contract
+export const api = {
+  auth: {
+    register: {
+      method: 'POST' as const,
+      path: '/api/register',
+      input: insertUserSchema,
+      responses: {
+        201: z.custom&lt;typeof users.$inferSelect&gt;(),
+        400: errorSchemas.validation,
+      },
+    },
+    login: {
+      method: 'POST' as const,
+      path: '/api/login',
+      input: z.object({ username: z.string(), password: z.string() }),
+      responses: {
+        200: z.custom&lt;typeof users.$inferSelect&gt;(),
+        401: errorSchemas.unauthorized,
+      },
+    },
+    logout: {
+      method: 'POST' as const,
+      path: '/api/logout',
+      responses: {
+        200: z.void(),
+      },
+    },
+    me: {
+      method: 'GET' as const,
+      path: '/api/user',
+      responses: {
+        200: z.custom&lt;typeof users.$inferSelect&gt;(),
+        401: errorSchemas.unauthorized,
+      },
+    },
+  },
+  assets: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/assets',
+      responses: {
+        200: z.array(z.custom&lt;typeof assets.$inferSelect&gt;()),
+      },
+    },
+    create: {
+      method: 'POST' as const,
+      path: '/api/assets',
+      input: insertAssetSchema,
+      responses: {
+        201: z.custom&lt;typeof assets.$inferSelect&gt;(),
+        400: errorSchemas.validation,
+      },
+    },
+    update: {
+      method: 'PUT' as const,
+      path: '/api/assets/:id',
+      input: insertAssetSchema.partial(),
+      responses: {
+        200: z.custom&lt;typeof assets.$inferSelect&gt;(),
+        404: errorSchemas.notFound,
+      },
+    },
+    delete: {
+      method: 'DELETE' as const,
+      path: '/api/assets/:id',
+      responses: {
+        204: z.void(),
+        404: errorSchemas.notFound,
+      },
+    },
+  },
+  liabilities: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/liabilities',
+      responses: {
+        200: z.array(z.custom&lt;typeof liabilities.$inferSelect&gt;()),
+      },
+    },
+    create: {
+      method: 'POST' as const,
+      path: '/api/liabilities',
+      input: insertLiabilitySchema,
+      responses: {
+        201: z.custom&lt;typeof liabilities.$inferSelect&gt;(),
+        400: errorSchemas.validation,
+      },
+    },
+    update: {
+      method: 'PUT' as const,
+      path: '/api/liabilities/:id',
+      input: insertLiabilitySchema.partial(),
+      responses: {
+        200: z.custom&lt;typeof liabilities.$inferSelect&gt;(),
+        404: errorSchemas.notFound,
+      },
+    },
+    delete: {
+      method: 'DELETE' as const,
+      path: '/api/liabilities/:id',
+      responses: {
+        204: z.void(),
+        404: errorSchemas.notFound,
+      },
+    },
+  },
+  transactions: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/transactions',
+      responses: {
+        200: z.array(z.custom&lt;typeof transactions.$inferSelect&gt;()),
+      },
+    },
+    create: {
+      method: 'POST' as const,
+      path: '/api/transactions',
+      input: insertTransactionSchema,
+      responses: {
+        201: z.custom&lt;typeof transactions.$inferSelect&gt;(),
+        400: errorSchemas.validation,
+      },
+    },
+    delete: {
+      method: 'DELETE' as const,
+      path: '/api/transactions/:id',
+      responses: {
+        204: z.void(),
+        404: errorSchemas.notFound,
+      },
+    },
+  },
+  dashboard: {
+    get: {
+      method: 'GET' as const,
+      path: '/api/dashboard',
+      responses: {
+        200: z.object({
+          totalAssets: z.number(),
+          totalLiabilities: z.number(),
+          netWorth: z.number(),
+          currency: z.string(),
+          monthlyIncome: z.number(),
+          monthlyExpenses: z.number(),
+          goldMetrics: z.object({
+            totalWeight: z.number(),
+            currentValue: z.number(),
+            investmentValue: z.number(),
+            plAmount: z.number(),
+            plPercent: z.number(),
+          }).optional(),
+        }),
+      },
+    },
+  },
+};
+
+export function buildUrl(path: string, params?: Record&lt;string, string | number&gt;): string {
+  let url = path;
+  if (params) {
+    Object.entries(params).forEach(([key, value]) =&gt; {
+      if (url.includes(`:${key}`)) {
+        url = url.replace(`:${key}`, String(value));
+      }
+    });
+  }
+  return url;
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f2">
+    <div class="fh">
+      <div class="fp">server/db.ts</div>
+      <div class="fm">15 lines · typescript</div>
+      <button class="cb" onclick="cp('f2')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f2-c">import { drizzle } from &quot;drizzle-orm/node-postgres&quot;;
+import pg from &quot;pg&quot;;
+import * as schema from &quot;@shared/schema&quot;;
+
+const { Pool } = pg;
+
+if (!process.env.DATABASE_URL) {
+  throw new Error(
+    &quot;DATABASE_URL must be set. Did you forget to provision a database?&quot;,
+  );
+}
+
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const db = drizzle(pool, { schema });
+</code></pre></div>
+    </section>
+    <section class="fs" id="f3">
+    <div class="fh">
+      <div class="fp">server/auth.ts</div>
+      <div class="fm">133 lines · typescript</div>
+      <button class="cb" onclick="cp('f3')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f3-c">import passport from &quot;passport&quot;;
+import { Strategy as LocalStrategy } from &quot;passport-local&quot;;
+import { Express } from &quot;express&quot;;
+import session from &quot;express-session&quot;;
+import { scrypt, randomBytes, timingSafeEqual } from &quot;crypto&quot;;
+import { promisify } from &quot;util&quot;;
+import { storage } from &quot;./storage&quot;;
+import { User } from &quot;@shared/schema&quot;;
+import { api } from &quot;@shared/routes&quot;;
+import { z } from &quot;zod&quot;;
+
+const scryptAsync = promisify(scrypt);
+
+async function hashPassword(password: string) {
+  const salt = randomBytes(16).toString(&quot;hex&quot;);
+  const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+  return `${buf.toString(&quot;hex&quot;)}.${salt}`;
+}
+
+async function comparePasswords(supplied: string, stored: string) {
+  const [hashed, salt] = stored.split(&quot;.&quot;);
+  const hashedBuf = Buffer.from(hashed, &quot;hex&quot;);
+  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
+  return timingSafeEqual(hashedBuf, suppliedBuf);
+}
+
+export function setupAuth(app: Express) {
+  const sessionSettings: session.SessionOptions = {
+    secret: process.env.SESSION_SECRET || &quot;r3pl1t_s3cr3t_k3y_123&quot;,
+    resave: false,
+    saveUninitialized: false,
+    store: undefined, // MemoryStore by default, fine for MVP
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      secure: app.get(&quot;env&quot;) === &quot;production&quot;,
+    },
+  };
+
+  if (app.get(&quot;env&quot;) === &quot;production&quot;) {
+    app.set(&quot;trust proxy&quot;, 1);
+  }
+
+  app.use(session(sessionSettings));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  passport.use(
+    new LocalStrategy(async (username, password, done) =&gt; {
+      try {
+        const user = await storage.getUserByUsername(username);
+        if (!user || !(await comparePasswords(password, user.password))) {
+          return done(null, false, { message: &quot;Invalid username or password&quot; });
+        } else {
+          return done(null, user);
+        }
+      } catch (err) {
+        return done(err);
+      }
+    }),
+  );
+
+  passport.serializeUser((user, done) =&gt; done(null, (user as User).id));
+  passport.deserializeUser(async (id: number, done) =&gt; {
+    try {
+      const user = await storage.getUser(id);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
+  });
+
+  app.post(api.auth.register.path, async (req, res, next) =&gt; {
+    try {
+      // Validate input
+      const input = api.auth.register.input.parse(req.body);
+      
+      const existingUser = await storage.getUserByUsername(input.username);
+      if (existingUser) {
+        return res.status(400).send(&quot;Username already exists&quot;);
+      }
+
+      const hashedPassword = await hashPassword(input.password);
+      const user = await storage.createUser({
+        ...input,
+        password: hashedPassword,
+      });
+
+      req.login(user, (err) =&gt; {
+        if (err) return next(err);
+        res.status(201).json(user);
+      });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+         return res.status(400).json(err.errors);
+      }
+      next(err);
+    }
+  });
+
+  app.post(api.auth.login.path, (req, res, next) =&gt; {
+     // Validate basic input exists
+    const result = api.auth.login.input.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json(result.error);
+    }
+
+    passport.authenticate(&quot;local&quot;, (err: any, user: any, info: any) =&gt; {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(401).json({ message: &quot;Invalid username or password&quot; });
+      }
+      req.login(user, (err) =&gt; {
+        if (err) return next(err);
+        res.status(200).json(user);
+      });
+    })(req, res, next);
+  });
+
+  app.post(api.auth.logout.path, (req, res, next) =&gt; {
+    req.logout((err) =&gt; {
+      if (err) return next(err);
+      res.sendStatus(200);
+    });
+  });
+
+  app.get(api.auth.me.path, (req, res) =&gt; {
+    if (!req.isAuthenticated()) {
+      return res.sendStatus(401);
+    }
+    res.json(req.user);
+  });
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f4">
+    <div class="fh">
+      <div class="fp">server/storage.ts</div>
+      <div class="fm">127 lines · typescript</div>
+      <button class="cb" onclick="cp('f4')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f4-c">import { db } from &quot;./db&quot;;
+import { 
+  users, assets, liabilities, transactions,
+  type User, type InsertUser,
+  type Asset, type InsertAsset, type UpdateAssetRequest,
+  type Liability, type InsertLiability, type UpdateLiabilityRequest,
+  type Transaction, type InsertTransaction, type CreateTransactionRequest
+} from &quot;@shared/schema&quot;;
+import { eq, desc, sql } from &quot;drizzle-orm&quot;;
+
+export interface IStorage {
+  // User
+  getUser(id: number): Promise&lt;User | undefined&gt;;
+  getUserByUsername(username: string): Promise&lt;User | undefined&gt;;
+  createUser(user: InsertUser): Promise&lt;User&gt;;
+  updateUserCurrency(id: number, currency: string): Promise&lt;void&gt;;
+
+  // Assets
+  getAssets(userId: number): Promise&lt;Asset[]&gt;;
+  getAsset(id: number): Promise&lt;Asset | undefined&gt;;
+  createAsset(asset: InsertAsset): Promise&lt;Asset&gt;;
+  updateAsset(id: number, updates: UpdateAssetRequest): Promise&lt;Asset&gt;;
+  deleteAsset(id: number): Promise&lt;void&gt;;
+
+  // Liabilities
+  getLiabilities(userId: number): Promise&lt;Liability[]&gt;;
+  getLiability(id: number): Promise&lt;Liability | undefined&gt;;
+  createLiability(liability: InsertLiability): Promise&lt;Liability&gt;;
+  updateLiability(id: number, updates: UpdateLiabilityRequest): Promise&lt;Liability&gt;;
+  deleteLiability(id: number): Promise&lt;void&gt;;
+
+  // Transactions
+  getTransactions(userId: number): Promise&lt;Transaction[]&gt;;
+  createTransaction(transaction: InsertTransaction): Promise&lt;Transaction&gt;;
+  deleteTransaction(id: number): Promise&lt;void&gt;;
+  
+  // Dashboard Aggregates (could be optimized with raw SQL later)
+}
+
+export class DatabaseStorage implements IStorage {
+  // User
+  async getUser(id: number): Promise&lt;User | undefined&gt; {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByUsername(username: string): Promise&lt;User | undefined&gt; {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+
+  async createUser(insertUser: InsertUser): Promise&lt;User&gt; {
+    const [user] = await db.insert(users).values(insertUser).returning();
+    return user;
+  }
+
+  async updateUserCurrency(id: number, currency: string): Promise&lt;void&gt; {
+    await db.update(users).set({ preferredCurrency: currency }).where(eq(users.id, id));
+  }
+
+  // Assets
+  async getAssets(userId: number): Promise&lt;Asset[]&gt; {
+    return await db.select().from(assets).where(eq(assets.userId, userId));
+  }
+
+  async getAsset(id: number): Promise&lt;Asset | undefined&gt; {
+    const [asset] = await db.select().from(assets).where(eq(assets.id, id));
+    return asset;
+  }
+
+  async createAsset(insertAsset: InsertAsset): Promise&lt;Asset&gt; {
+    const [asset] = await db.insert(assets).values(insertAsset).returning();
+    return asset;
+  }
+
+  async updateAsset(id: number, updates: UpdateAssetRequest): Promise&lt;Asset&gt; {
+    const [updated] = await db.update(assets).set(updates).where(eq(assets.id, id)).returning();
+    return updated;
+  }
+
+  async deleteAsset(id: number): Promise&lt;void&gt; {
+    await db.delete(assets).where(eq(assets.id, id));
+  }
+
+  // Liabilities
+  async getLiabilities(userId: number): Promise&lt;Liability[]&gt; {
+    return await db.select().from(liabilities).where(eq(liabilities.userId, userId));
+  }
+
+  async getLiability(id: number): Promise&lt;Liability | undefined&gt; {
+    const [liability] = await db.select().from(liabilities).where(eq(liabilities.id, id));
+    return liability;
+  }
+
+  async createLiability(insertLiability: InsertLiability): Promise&lt;Liability&gt; {
+    const [liability] = await db.insert(liabilities).values(insertLiability).returning();
+    return liability;
+  }
+
+  async updateLiability(id: number, updates: UpdateLiabilityRequest): Promise&lt;Liability&gt; {
+    const [updated] = await db.update(liabilities).set(updates).where(eq(liabilities.id, id)).returning();
+    return updated;
+  }
+
+  async deleteLiability(id: number): Promise&lt;void&gt; {
+    await db.delete(liabilities).where(eq(liabilities.id, id));
+  }
+
+  // Transactions
+  async getTransactions(userId: number): Promise&lt;Transaction[]&gt; {
+    return await db.select().from(transactions)
+      .where(eq(transactions.userId, userId))
+      .orderBy(desc(transactions.date));
+  }
+
+  async createTransaction(insertTransaction: InsertTransaction): Promise&lt;Transaction&gt; {
+    const [transaction] = await db.insert(transactions).values(insertTransaction).returning();
+    return transaction;
+  }
+
+  async deleteTransaction(id: number): Promise&lt;void&gt; {
+    await db.delete(transactions).where(eq(transactions.id, id));
+  }
+}
+
+export const storage = new DatabaseStorage();
+</code></pre></div>
+    </section>
+    <section class="fs" id="f5">
+    <div class="fh">
+      <div class="fp">server/routes.ts</div>
+      <div class="fm">198 lines · typescript</div>
+      <button class="cb" onclick="cp('f5')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f5-c">import type { Express } from &quot;express&quot;;
+import type { Server } from &quot;http&quot;;
+import { setupAuth } from &quot;./auth&quot;;
+import { storage } from &quot;./storage&quot;;
+import { api } from &quot;@shared/routes&quot;;
+import { z } from &quot;zod&quot;;
+
+export async function registerRoutes(
+  httpServer: Server,
+  app: Express
+): Promise&lt;Server&gt; {
+  // Setup Auth (Passport + Session)
+  setupAuth(app);
+
+  // Middleware to check authentication
+  const requireAuth = (req: any, res: any, next: any) =&gt; {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.status(401).json({ message: &quot;Unauthorized&quot; });
+  };
+
+  // === Assets ===
+  app.get(api.assets.list.path, requireAuth, async (req, res) =&gt; {
+    const assets = await storage.getAssets(req.user!.id);
+    res.json(assets);
+  });
+
+  app.post(api.assets.create.path, requireAuth, async (req, res) =&gt; {
+    try {
+      const input = api.assets.create.input.parse(req.body);
+      const asset = await storage.createAsset({ ...input, userId: req.user!.id });
+      res.status(201).json(asset);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      throw err;
+    }
+  });
+
+  app.put(api.assets.update.path, requireAuth, async (req, res) =&gt; {
+    try {
+      const input = api.assets.update.input.parse(req.body);
+      const asset = await storage.updateAsset(Number(req.params.id), input);
+      res.json(asset);
+    } catch (err) {
+       if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      res.status(404).json({ message: &quot;Asset not found&quot; });
+    }
+  });
+
+  app.delete(api.assets.delete.path, requireAuth, async (req, res) =&gt; {
+    await storage.deleteAsset(Number(req.params.id));
+    res.status(204).send();
+  });
+
+  // === Liabilities ===
+  app.get(api.liabilities.list.path, requireAuth, async (req, res) =&gt; {
+    const liabilities = await storage.getLiabilities(req.user!.id);
+    res.json(liabilities);
+  });
+
+  app.post(api.liabilities.create.path, requireAuth, async (req, res) =&gt; {
+    try {
+      const input = api.liabilities.create.input.parse(req.body);
+      const liability = await storage.createLiability({ ...input, userId: req.user!.id });
+      res.status(201).json(liability);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      throw err;
+    }
+  });
+
+  app.put(api.liabilities.update.path, requireAuth, async (req, res) =&gt; {
+    try {
+      const input = api.liabilities.update.input.parse(req.body);
+      const liability = await storage.updateLiability(Number(req.params.id), input);
+      res.json(liability);
+    } catch (err) {
+       if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      res.status(404).json({ message: &quot;Liability not found&quot; });
+    }
+  });
+
+  app.delete(api.liabilities.delete.path, requireAuth, async (req, res) =&gt; {
+    await storage.deleteLiability(Number(req.params.id));
+    res.status(204).send();
+  });
+
+  // === Transactions ===
+  app.get(api.transactions.list.path, requireAuth, async (req, res) =&gt; {
+    const transactions = await storage.getTransactions(req.user!.id);
+    res.json(transactions);
+  });
+
+  app.post(api.transactions.create.path, requireAuth, async (req, res) =&gt; {
+    try {
+      const input = api.transactions.create.input.parse(req.body);
+      // Ensure date is properly parsed if it's a string, though Zod schema handles it mostly.
+      // If schema says date is Date object, Zod might expect string if coming from JSON. 
+      // InsertTransaction has date as Date | null.
+      const transaction = await storage.createTransaction({ 
+        ...input, 
+        userId: req.user!.id,
+        date: input.date ? new Date(input.date) : new Date() 
+      });
+      res.status(201).json(transaction);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      throw err;
+    }
+  });
+
+  app.delete(api.transactions.delete.path, requireAuth, async (req, res) =&gt; {
+    await storage.deleteTransaction(Number(req.params.id));
+    res.status(204).send();
+  });
+
+  // === User ===
+  app.patch(&quot;/api/user/currency&quot;, requireAuth, async (req, res) =&gt; {
+    const { currency } = req.body;
+    if (!['INR', 'AED', 'USD'].includes(currency)) {
+      return res.status(400).json({ message: &quot;Invalid currency&quot; });
+    }
+    await storage.updateUserCurrency(req.user!.id, currency);
+    res.json({ ok: true });
+  });
+
+  // === Dashboard ===
+  app.get(api.dashboard.get.path, requireAuth, async (req, res) =&gt; {
+    const userId = req.user!.id;
+    const user = await storage.getUser(userId);
+    const assetsList = await storage.getAssets(userId);
+    const liabilitiesList = await storage.getLiabilities(userId);
+    const transactionsList = await storage.getTransactions(userId);
+
+    const totalAssets = assetsList.reduce((sum, item) =&gt; sum + Number(item.value), 0);
+    const totalLiabilities = liabilitiesList.reduce((sum, item) =&gt; sum + Number(item.outstandingAmount), 0);
+    const netWorth = totalAssets - totalLiabilities;
+
+    // Monthly income/expenses (current month)
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const monthlyTransactions = transactionsList.filter(t =&gt; t.date &amp;&amp; new Date(t.date) &gt;= startOfMonth);
+    const monthlyIncome = monthlyTransactions
+      .filter(t =&gt; t.type === 'INCOME')
+      .reduce((sum, t) =&gt; sum + Number(t.amount), 0);
+    const monthlyExpenses = monthlyTransactions
+      .filter(t =&gt; t.type === 'EXPENSE')
+      .reduce((sum, t) =&gt; sum + Number(t.amount), 0);
+
+    // Gold Metrics
+    const goldAssets = assetsList.filter(a =&gt; a.type === 'GOLD');
+    let goldMetrics;
+    if (goldAssets.length &gt; 0) {
+      const totalWeight = goldAssets.reduce((sum, item) =&gt; sum + (Number(item.weight) || 0), 0);
+      const currentValue = goldAssets.reduce((sum, item) =&gt; sum + Number(item.value), 0);
+      const investmentValue = goldAssets.reduce((sum, item) =&gt; {
+        if (item.purchaseRate &amp;&amp; item.weight) {
+          return sum + (Number(item.purchaseRate) * Number(item.weight));
+        }
+        return sum + Number(item.value);
+      }, 0);
+      const plAmount = currentValue - investmentValue;
+      const plPercent = investmentValue &gt; 0 ? (plAmount / investmentValue) * 100 : 0;
+      
+      goldMetrics = {
+        totalWeight,
+        currentValue,
+        investmentValue,
+        plAmount,
+        plPercent,
+      };
+    }
+
+    res.json({
+      totalAssets,
+      totalLiabilities,
+      netWorth,
+      currency: user?.preferredCurrency || &quot;INR&quot;,
+      monthlyIncome,
+      monthlyExpenses,
+      goldMetrics
+    });
+  });
+
+  return httpServer;
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f6">
+    <div class="fh">
+      <div class="fp">server/index.ts</div>
+      <div class="fm">104 lines · typescript</div>
+      <button class="cb" onclick="cp('f6')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f6-c">import express, { type Request, Response, NextFunction } from &quot;express&quot;;
+import { registerRoutes } from &quot;./routes&quot;;
+import { serveStatic } from &quot;./static&quot;;
+import { createServer } from &quot;http&quot;;
+
+const app = express();
+const httpServer = createServer(app);
+
+declare module &quot;http&quot; {
+  interface IncomingMessage {
+    rawBody: unknown;
+  }
+}
+
+app.use(
+  express.json({
+    verify: (req, _res, buf) =&gt; {
+      req.rawBody = buf;
+    },
+  }),
+);
+
+app.use(express.urlencoded({ extended: false }));
+
+export function log(message: string, source = &quot;express&quot;) {
+  const formattedTime = new Date().toLocaleTimeString(&quot;en-US&quot;, {
+    hour: &quot;numeric&quot;,
+    minute: &quot;2-digit&quot;,
+    second: &quot;2-digit&quot;,
+    hour12: true,
+  });
+
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
+
+app.use((req, res, next) =&gt; {
+  const start = Date.now();
+  const path = req.path;
+  let capturedJsonResponse: Record&lt;string, any&gt; | undefined = undefined;
+
+  const originalResJson = res.json;
+  res.json = function (bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
+  };
+
+  res.on(&quot;finish&quot;, () =&gt; {
+    const duration = Date.now() - start;
+    if (path.startsWith(&quot;/api&quot;)) {
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
+
+      log(logLine);
+    }
+  });
+
+  next();
+});
+
+(async () =&gt; {
+  await registerRoutes(httpServer, app);
+
+  app.use((err: any, _req: Request, res: Response, next: NextFunction) =&gt; {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || &quot;Internal Server Error&quot;;
+
+    console.error(&quot;Internal Server Error:&quot;, err);
+
+    if (res.headersSent) {
+      return next(err);
+    }
+
+    return res.status(status).json({ message });
+  });
+
+  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (process.env.NODE_ENV === &quot;production&quot;) {
+    serveStatic(app);
+  } else {
+    const { setupVite } = await import(&quot;./vite&quot;);
+    await setupVite(httpServer, app);
+  }
+
+  // ALWAYS serve the app on the port specified in the environment variable PORT
+  // Other ports are firewalled. Default to 5000 if not specified.
+  // this serves both the API and the client.
+  // It is the only port that is not firewalled.
+  const port = parseInt(process.env.PORT || &quot;5000&quot;, 10);
+  httpServer.listen(
+    {
+      port,
+      host: &quot;0.0.0.0&quot;,
+      reusePort: true,
+    },
+    () =&gt; {
+      log(`serving on port ${port}`);
+    },
+  );
+})();
+</code></pre></div>
+    </section>
+    <section class="fs" id="f7">
+    <div class="fh">
+      <div class="fp">client/src/main.tsx</div>
+      <div class="fm">6 lines · typescript</div>
+      <button class="cb" onclick="cp('f7')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f7-c">import { createRoot } from &quot;react-dom/client&quot;;
+import App from &quot;./App&quot;;
+import &quot;./index.css&quot;;
+
+createRoot(document.getElementById(&quot;root&quot;)!).render(&lt;App /&gt;);
+</code></pre></div>
+    </section>
+    <section class="fs" id="f8">
+    <div class="fh">
+      <div class="fp">client/src/App.tsx</div>
+      <div class="fm">73 lines · typescript</div>
+      <button class="cb" onclick="cp('f8')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f8-c">import { Switch, Route, useLocation } from &quot;wouter&quot;;
+import { queryClient } from &quot;./lib/queryClient&quot;;
+import { QueryClientProvider } from &quot;@tanstack/react-query&quot;;
+import { Toaster } from &quot;@/components/ui/toaster&quot;;
+import { useAuth } from &quot;@/hooks/use-auth&quot;;
+import { Loader2 } from &quot;lucide-react&quot;;
+import Dashboard from &quot;@/pages/Dashboard&quot;;
+import Assets from &quot;@/pages/Assets&quot;;
+import Liabilities from &quot;@/pages/Liabilities&quot;;
+import Reports from &quot;@/pages/Reports&quot;;
+import Transactions from &quot;@/pages/Transactions&quot;;
+import Settings from &quot;@/pages/Settings&quot;;
+import AuthPage from &quot;@/pages/Auth&quot;;
+import NotFound from &quot;@/pages/not-found&quot;;
+
+function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
+  const { user, isLoading } = useAuth();
+  const [_, setLocation] = useLocation();
+
+  if (isLoading) {
+    return (
+      &lt;div className=&quot;h-screen w-screen flex items-center justify-center bg-background&quot;&gt;
+        &lt;Loader2 className=&quot;w-8 h-8 animate-spin text-primary&quot; /&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  if (!user) {
+    // Redirect logic handled in useAuth or here
+    return &lt;AuthPage /&gt;;
+  }
+
+  return &lt;Component /&gt;;
+}
+
+function Router() {
+  return (
+    &lt;Switch&gt;
+      &lt;Route path=&quot;/auth&quot; component={AuthPage} /&gt;
+      &lt;Route path=&quot;/&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Dashboard} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route path=&quot;/assets&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Assets} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route path=&quot;/liabilities&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Liabilities} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route path=&quot;/reports&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Reports} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route path=&quot;/transactions&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Transactions} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route path=&quot;/settings&quot;&gt;
+        {() =&gt; &lt;ProtectedRoute component={Settings} /&gt;}
+      &lt;/Route&gt;
+      &lt;Route component={NotFound} /&gt;
+    &lt;/Switch&gt;
+  );
+}
+
+function App() {
+  return (
+    &lt;QueryClientProvider client={queryClient}&gt;
+      &lt;Router /&gt;
+      &lt;Toaster /&gt;
+    &lt;/QueryClientProvider&gt;
+  );
+}
+
+export default App;
+</code></pre></div>
+    </section>
+    <section class="fs" id="f9">
+    <div class="fh">
+      <div class="fp">client/src/index.css</div>
+      <div class="fm">73 lines · css</div>
+      <button class="cb" onclick="cp('f9')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f9-c">@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&amp;family=Outfit:wght@100..900&amp;display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Deep, rich dark theme palette */
+  --background: 224 71% 4%;
+  --foreground: 210 40% 98%;
+
+  --card: 224 71% 7%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 224 71% 7%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 263 70% 50%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 217 19% 27%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217 19% 27%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 263 70% 50%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 263 70% 50%;
+
+  --radius: 1rem;
+  
+  /* Status colors */
+  --success: 142 71% 45%;
+  --warning: 45 93% 47%;
+  --gold: 48 96% 53%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-white/5 shadow-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-pink-500;
+  }
+
+  .text-gold {
+    @apply text-[hsl(var(--gold))];
+  }
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f10">
+    <div class="fh">
+      <div class="fp">client/src/lib/queryClient.ts</div>
+      <div class="fm">58 lines · typescript</div>
+      <button class="cb" onclick="cp('f10')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f10-c">import { QueryClient, QueryFunction } from &quot;@tanstack/react-query&quot;;
+
+async function throwIfResNotOk(res: Response) {
+  if (!res.ok) {
+    const text = (await res.text()) || res.statusText;
+    throw new Error(`${res.status}: ${text}`);
+  }
+}
+
+export async function apiRequest(
+  method: string,
+  url: string,
+  data?: unknown | undefined,
+): Promise&lt;Response&gt; {
+  const res = await fetch(url, {
+    method,
+    headers: data ? { &quot;Content-Type&quot;: &quot;application/json&quot; } : {},
+    body: data ? JSON.stringify(data) : undefined,
+    credentials: &quot;include&quot;,
+  });
+
+  await throwIfResNotOk(res);
+  return res;
+}
+
+type UnauthorizedBehavior = &quot;returnNull&quot; | &quot;throw&quot;;
+export const getQueryFn: &lt;T&gt;(options: {
+  on401: UnauthorizedBehavior;
+}) =&gt; QueryFunction&lt;T&gt; =
+  ({ on401: unauthorizedBehavior }) =&gt;
+  async ({ queryKey }) =&gt; {
+    const res = await fetch(queryKey.join(&quot;/&quot;) as string, {
+      credentials: &quot;include&quot;,
+    });
+
+    if (unauthorizedBehavior === &quot;returnNull&quot; &amp;&amp; res.status === 401) {
+      return null;
+    }
+
+    await throwIfResNotOk(res);
+    return await res.json();
+  };
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: getQueryFn({ on401: &quot;throw&quot; }),
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
+</code></pre></div>
+    </section>
+    <section class="fs" id="f11">
+    <div class="fh">
+      <div class="fp">client/src/lib/utils.ts</div>
+      <div class="fm">7 lines · typescript</div>
+      <button class="cb" onclick="cp('f11')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f11-c">import { clsx, type ClassValue } from &quot;clsx&quot;
+import { twMerge } from &quot;tailwind-merge&quot;
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f12">
+    <div class="fh">
+      <div class="fp">client/src/hooks/use-auth.ts</div>
+      <div class="fm">86 lines · typescript</div>
+      <button class="cb" onclick="cp('f12')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f12-c">import { useQuery, useMutation, useQueryClient } from &quot;@tanstack/react-query&quot;;
+import { api, type InsertUser, type User } from &quot;@shared/routes&quot;;
+import { useLocation } from &quot;wouter&quot;;
+
+export function useAuth() {
+  const queryClient = useQueryClient();
+  const [_, setLocation] = useLocation();
+
+  const { data: user, isLoading, error } = useQuery({
+    queryKey: [api.auth.me.path],
+    queryFn: async () =&gt; {
+      const res = await fetch(api.auth.me.path);
+      if (res.status === 401) return null;
+      if (!res.ok) throw new Error(&quot;Failed to fetch user&quot;);
+      return api.auth.me.responses[200].parse(await res.json());
+    },
+    retry: false,
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: async (credentials: { username: string; password: string }) =&gt; {
+      const res = await fetch(api.auth.login.path, {
+        method: api.auth.login.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(credentials),
+      });
+
+      if (!res.ok) {
+        if (res.status === 401) throw new Error(&quot;Invalid credentials&quot;);
+        const error = await res.json();
+        throw new Error(error.message || &quot;Login failed&quot;);
+      }
+
+      return api.auth.login.responses[200].parse(await res.json());
+    },
+    onSuccess: (user) =&gt; {
+      queryClient.setQueryData([api.auth.me.path], user);
+      setLocation(&quot;/&quot;);
+    },
+  });
+
+  const registerMutation = useMutation({
+    mutationFn: async (data: InsertUser) =&gt; {
+      const validated = api.auth.register.input.parse(data);
+      const res = await fetch(api.auth.register.path, {
+        method: api.auth.register.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || &quot;Registration failed&quot;);
+      }
+
+      return api.auth.register.responses[201].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      // Auto login or redirect to login? Let's redirect to login for simplicity or auto-login if backend supports it.
+      // Assuming registration doesn't auto-login, redirect to login page
+      setLocation(&quot;/auth&quot;);
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () =&gt; {
+      await fetch(api.auth.logout.path, { method: api.auth.logout.method });
+    },
+    onSuccess: () =&gt; {
+      queryClient.setQueryData([api.auth.me.path], null);
+      setLocation(&quot;/auth&quot;);
+    },
+  });
+
+  return {
+    user,
+    isLoading,
+    error,
+    login: loginMutation.mutateAsync,
+    register: registerMutation.mutateAsync,
+    logout: logoutMutation.mutateAsync,
+    isLoggingIn: loginMutation.isPending,
+    isRegistering: registerMutation.isPending,
+  };
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f13">
+    <div class="fh">
+      <div class="fp">client/src/hooks/use-dashboard.ts</div>
+      <div class="fm">14 lines · typescript</div>
+      <button class="cb" onclick="cp('f13')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f13-c">import { useQuery } from &quot;@tanstack/react-query&quot;;
+import { api } from &quot;@shared/routes&quot;;
+
+export function useDashboard() {
+  return useQuery({
+    queryKey: [api.dashboard.get.path],
+    queryFn: async () =&gt; {
+      const res = await fetch(api.dashboard.get.path, { credentials: &quot;include&quot; });
+      if (!res.ok) throw new Error(&quot;Failed to fetch dashboard data&quot;);
+      return api.dashboard.get.responses[200].parse(await res.json());
+    },
+  });
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f14">
+    <div class="fh">
+      <div class="fp">client/src/hooks/use-assets.ts</div>
+      <div class="fm">75 lines · typescript</div>
+      <button class="cb" onclick="cp('f14')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f14-c">import { useQuery, useMutation, useQueryClient } from &quot;@tanstack/react-query&quot;;
+import { api, buildUrl, type InsertAsset, type Asset } from &quot;@shared/routes&quot;;
+
+export function useAssets() {
+  return useQuery({
+    queryKey: [api.assets.list.path],
+    queryFn: async () =&gt; {
+      const res = await fetch(api.assets.list.path, { credentials: &quot;include&quot; });
+      if (!res.ok) throw new Error(&quot;Failed to fetch assets&quot;);
+      return api.assets.list.responses[200].parse(await res.json());
+    },
+  });
+}
+
+export function useCreateAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: InsertAsset) =&gt; {
+      const validated = api.assets.create.input.parse(data);
+      const res = await fetch(api.assets.create.path, {
+        method: api.assets.create.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to create asset&quot;);
+      return api.assets.create.responses[201].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.assets.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+
+export function useUpdateAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...data }: { id: number } &amp; Partial&lt;InsertAsset&gt;) =&gt; {
+      const validated = api.assets.update.input.parse(data);
+      const url = buildUrl(api.assets.update.path, { id });
+      const res = await fetch(url, {
+        method: api.assets.update.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to update asset&quot;);
+      return api.assets.update.responses[200].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.assets.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+
+export function useDeleteAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) =&gt; {
+      const url = buildUrl(api.assets.delete.path, { id });
+      const res = await fetch(url, {
+        method: api.assets.delete.method,
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to delete asset&quot;);
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.assets.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f15">
+    <div class="fh">
+      <div class="fp">client/src/hooks/use-liabilities.ts</div>
+      <div class="fm">75 lines · typescript</div>
+      <button class="cb" onclick="cp('f15')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f15-c">import { useQuery, useMutation, useQueryClient } from &quot;@tanstack/react-query&quot;;
+import { api, buildUrl, type InsertLiability, type Liability } from &quot;@shared/routes&quot;;
+
+export function useLiabilities() {
+  return useQuery({
+    queryKey: [api.liabilities.list.path],
+    queryFn: async () =&gt; {
+      const res = await fetch(api.liabilities.list.path, { credentials: &quot;include&quot; });
+      if (!res.ok) throw new Error(&quot;Failed to fetch liabilities&quot;);
+      return api.liabilities.list.responses[200].parse(await res.json());
+    },
+  });
+}
+
+export function useCreateLiability() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: InsertLiability) =&gt; {
+      const validated = api.liabilities.create.input.parse(data);
+      const res = await fetch(api.liabilities.create.path, {
+        method: api.liabilities.create.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to create liability&quot;);
+      return api.liabilities.create.responses[201].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.liabilities.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+
+export function useUpdateLiability() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...data }: { id: number } &amp; Partial&lt;InsertLiability&gt;) =&gt; {
+      const validated = api.liabilities.update.input.parse(data);
+      const url = buildUrl(api.liabilities.update.path, { id });
+      const res = await fetch(url, {
+        method: api.liabilities.update.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to update liability&quot;);
+      return api.liabilities.update.responses[200].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.liabilities.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+
+export function useDeleteLiability() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) =&gt; {
+      const url = buildUrl(api.liabilities.delete.path, { id });
+      const res = await fetch(url, {
+        method: api.liabilities.delete.method,
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to delete liability&quot;);
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.liabilities.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f16">
+    <div class="fh">
+      <div class="fp">client/src/hooks/use-transactions.ts</div>
+      <div class="fm">53 lines · typescript</div>
+      <button class="cb" onclick="cp('f16')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f16-c">import { useQuery, useMutation, useQueryClient } from &quot;@tanstack/react-query&quot;;
+import { api, buildUrl, type InsertTransaction } from &quot;@shared/routes&quot;;
+
+export function useTransactions() {
+  return useQuery({
+    queryKey: [api.transactions.list.path],
+    queryFn: async () =&gt; {
+      const res = await fetch(api.transactions.list.path, { credentials: &quot;include&quot; });
+      if (!res.ok) throw new Error(&quot;Failed to fetch transactions&quot;);
+      return api.transactions.list.responses[200].parse(await res.json());
+    },
+  });
+}
+
+export function useCreateTransaction() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: InsertTransaction) =&gt; {
+      const validated = api.transactions.create.input.parse(data);
+      const res = await fetch(api.transactions.create.path, {
+        method: api.transactions.create.method,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        body: JSON.stringify(validated),
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to create transaction&quot;);
+      return api.transactions.create.responses[201].parse(await res.json());
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.transactions.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+
+export function useDeleteTransaction() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) =&gt; {
+      const url = buildUrl(api.transactions.delete.path, { id });
+      const res = await fetch(url, {
+        method: api.transactions.delete.method,
+        credentials: &quot;include&quot;,
+      });
+      if (!res.ok) throw new Error(&quot;Failed to delete transaction&quot;);
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [api.transactions.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+    },
+  });
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f17">
+    <div class="fh">
+      <div class="fp">client/src/components/BottomNav.tsx</div>
+      <div class="fm">45 lines · typescript</div>
+      <button class="cb" onclick="cp('f17')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f17-c">import { Link, useLocation } from &quot;wouter&quot;;
+import { Home, PieChart, Wallet, CreditCard, Settings, ArrowLeftRight } from &quot;lucide-react&quot;;
+import { cn } from &quot;@/lib/utils&quot;;
+
+export function BottomNav() {
+  const [location] = useLocation();
+
+  const navItems = [
+    { href: &quot;/&quot;, icon: Home, label: &quot;Home&quot; },
+    { href: &quot;/assets&quot;, icon: Wallet, label: &quot;Assets&quot; },
+    { href: &quot;/transactions&quot;, icon: ArrowLeftRight, label: &quot;Transactions&quot; },
+    { href: &quot;/liabilities&quot;, icon: CreditCard, label: &quot;Debts&quot; },
+    { href: &quot;/settings&quot;, icon: Settings, label: &quot;Settings&quot; },
+  ];
+
+  return (
+    &lt;nav className=&quot;fixed bottom-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-t border-white/5 pb-safe-area-inset-bottom&quot;&gt;
+      &lt;div className=&quot;flex justify-around items-center h-16 max-w-lg mx-auto px-2&quot;&gt;
+        {navItems.map(({ href, icon: Icon, label }) =&gt; {
+          const isActive = location === href;
+          return (
+            &lt;Link key={href} href={href}&gt;
+              &lt;button
+                data-testid={`nav-${label.toLowerCase().replace(/\s+/g, '-')}`}
+                className={cn(
+                  &quot;flex flex-col items-center justify-center w-full h-full space-y-1 transition-all duration-200 px-3&quot;,
+                  isActive ? &quot;text-primary&quot; : &quot;text-muted-foreground hover:text-foreground&quot;
+                )}
+              &gt;
+                &lt;div className={cn(
+                  &quot;p-1.5 rounded-xl transition-all&quot;,
+                  isActive ? &quot;bg-primary/10&quot; : &quot;bg-transparent&quot;
+                )}&gt;
+                  &lt;Icon className=&quot;w-5 h-5&quot; strokeWidth={isActive ? 2.5 : 2} /&gt;
+                &lt;/div&gt;
+                &lt;span className=&quot;text-[10px] font-medium leading-none&quot;&gt;{label}&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/Link&gt;
+          );
+        })}
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f18">
+    <div class="fh">
+      <div class="fp">client/src/components/PageHeader.tsx</div>
+      <div class="fm">24 lines · typescript</div>
+      <button class="cb" onclick="cp('f18')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f18-c">import { ReactNode } from &quot;react&quot;;
+
+interface PageHeaderProps {
+  title: string;
+  subtitle?: string;
+  action?: ReactNode;
+}
+
+export function PageHeader({ title, subtitle, action }: PageHeaderProps) {
+  return (
+    &lt;div className=&quot;flex items-center justify-between mb-8&quot;&gt;
+      &lt;div&gt;
+        &lt;h1 className=&quot;text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70&quot;&gt;
+          {title}
+        &lt;/h1&gt;
+        {subtitle &amp;&amp; (
+          &lt;p className=&quot;text-muted-foreground mt-1 text-sm md:text-base&quot;&gt;{subtitle}&lt;/p&gt;
+        )}
+      &lt;/div&gt;
+      {action &amp;&amp; &lt;div&gt;{action}&lt;/div&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f19">
+    <div class="fh">
+      <div class="fp">client/src/components/CreateAssetDialog.tsx</div>
+      <div class="fm">194 lines · typescript</div>
+      <button class="cb" onclick="cp('f19')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f19-c">import { useState } from &quot;react&quot;;
+import { useForm } from &quot;react-hook-form&quot;;
+import { zodResolver } from &quot;@hookform/resolvers/zod&quot;;
+import { insertAssetSchema, type InsertAsset } from &quot;@shared/schema&quot;;
+import { useCreateAsset } from &quot;@/hooks/use-assets&quot;;
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from &quot;@/components/ui/dialog&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Input } from &quot;@/components/ui/input&quot;;
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from &quot;@/components/ui/select&quot;;
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from &quot;@/components/ui/form&quot;;
+import { Loader2, Plus } from &quot;lucide-react&quot;;
+
+const ASSET_TYPES = [
+  { value: &quot;BANK&quot;, label: &quot;Bank Account&quot; },
+  { value: &quot;CASH&quot;, label: &quot;Cash / Wallet&quot; },
+  { value: &quot;GOLD&quot;, label: &quot;Gold&quot; },
+  { value: &quot;SILVER&quot;, label: &quot;Silver&quot; },
+  { value: &quot;STOCK&quot;, label: &quot;Stocks&quot; },
+  { value: &quot;MUTUAL_FUND&quot;, label: &quot;Mutual Fund / SIP&quot; },
+  { value: &quot;CRYPTO&quot;, label: &quot;Cryptocurrency&quot; },
+  { value: &quot;FD&quot;, label: &quot;Fixed Deposit&quot; },
+  { value: &quot;PROPERTY&quot;, label: &quot;Property / Real Estate&quot; },
+  { value: &quot;VEHICLE&quot;, label: &quot;Vehicle&quot; },
+  { value: &quot;BUSINESS&quot;, label: &quot;Business Investment&quot; },
+  { value: &quot;OTHER&quot;, label: &quot;Other&quot; },
+];
+
+export function CreateAssetDialog() {
+  const [open, setOpen] = useState(false);
+  const { mutate, isPending } = useCreateAsset();
+
+  const form = useForm&lt;InsertAsset&gt;({
+    resolver: zodResolver(insertAssetSchema),
+    defaultValues: {
+      name: &quot;&quot;,
+      value: &quot;0&quot;,
+      type: &quot;BANK&quot;,
+      currency: &quot;INR&quot;,
+      weight: &quot;0&quot;,
+      purchaseRate: &quot;0&quot;,
+    },
+  });
+
+  const onSubmit = (data: InsertAsset) =&gt; {
+    mutate(data, {
+      onSuccess: () =&gt; {
+        setOpen(false);
+        form.reset();
+      },
+    });
+  };
+
+  const assetType = form.watch(&quot;type&quot;);
+  const isGoldSilver = assetType === &quot;GOLD&quot; || assetType === &quot;SILVER&quot;;
+
+  return (
+    &lt;Dialog open={open} onOpenChange={setOpen}&gt;
+      &lt;DialogTrigger asChild&gt;
+        &lt;Button
+          className=&quot;rounded-full w-12 h-12 md:w-auto md:h-10 md:rounded-xl md:px-6 shadow-lg shadow-primary/25 bg-primary hover:bg-primary/90&quot;
+          data-testid=&quot;button-open-add-asset&quot;
+        &gt;
+          &lt;Plus className=&quot;w-5 h-5 md:mr-2&quot; /&gt;
+          &lt;span className=&quot;hidden md:inline&quot;&gt;Add Asset&lt;/span&gt;
+        &lt;/Button&gt;
+      &lt;/DialogTrigger&gt;
+      &lt;DialogContent className=&quot;sm:max-w-md bg-card border-white/10&quot;&gt;
+        &lt;DialogHeader&gt;
+          &lt;DialogTitle&gt;Add New Asset&lt;/DialogTitle&gt;
+        &lt;/DialogHeader&gt;
+        &lt;Form {...form}&gt;
+          &lt;form onSubmit={form.handleSubmit(onSubmit)} className=&quot;space-y-4&quot;&gt;
+            &lt;FormField
+              control={form.control}
+              name=&quot;name&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Asset Name&lt;/FormLabel&gt;
+                  &lt;FormControl&gt;
+                    &lt;Input
+                      placeholder=&quot;e.g. HDFC Savings&quot;
+                      {...field}
+                      className=&quot;bg-background/50 border-white/10&quot;
+                      data-testid=&quot;input-asset-name&quot;
+                    /&gt;
+                  &lt;/FormControl&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;FormField
+              control={form.control}
+              name=&quot;type&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Type&lt;/FormLabel&gt;
+                  &lt;Select onValueChange={field.onChange} defaultValue={field.value}&gt;
+                    &lt;FormControl&gt;
+                      &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;select-asset-type&quot;&gt;
+                        &lt;SelectValue placeholder=&quot;Select type&quot; /&gt;
+                      &lt;/SelectTrigger&gt;
+                    &lt;/FormControl&gt;
+                    &lt;SelectContent&gt;
+                      {ASSET_TYPES.map(t =&gt; (
+                        &lt;SelectItem key={t.value} value={t.value}&gt;{t.label}&lt;/SelectItem&gt;
+                      ))}
+                    &lt;/SelectContent&gt;
+                  &lt;/Select&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;div className=&quot;grid grid-cols-2 gap-4&quot;&gt;
+              &lt;FormField
+                control={form.control}
+                name=&quot;value&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Current Value&lt;/FormLabel&gt;
+                    &lt;FormControl&gt;
+                      &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-asset-value&quot; /&gt;
+                    &lt;/FormControl&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+
+              &lt;FormField
+                control={form.control}
+                name=&quot;currency&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Currency&lt;/FormLabel&gt;
+                    &lt;Select onValueChange={field.onChange} defaultValue={field.value}&gt;
+                      &lt;FormControl&gt;
+                        &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot;&gt;
+                          &lt;SelectValue placeholder=&quot;Currency&quot; /&gt;
+                        &lt;/SelectTrigger&gt;
+                      &lt;/FormControl&gt;
+                      &lt;SelectContent&gt;
+                        &lt;SelectItem value=&quot;INR&quot;&gt;INR (₹)&lt;/SelectItem&gt;
+                        &lt;SelectItem value=&quot;AED&quot;&gt;AED (د.إ)&lt;/SelectItem&gt;
+                        &lt;SelectItem value=&quot;USD&quot;&gt;USD ($)&lt;/SelectItem&gt;
+                      &lt;/SelectContent&gt;
+                    &lt;/Select&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+            &lt;/div&gt;
+
+            {isGoldSilver &amp;&amp; (
+              &lt;div className=&quot;grid grid-cols-2 gap-4 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20&quot;&gt;
+                &lt;FormField
+                  control={form.control}
+                  name=&quot;weight&quot;
+                  render={({ field }) =&gt; (
+                    &lt;FormItem&gt;
+                      &lt;FormLabel className=&quot;text-yellow-400&quot;&gt;Weight (g)&lt;/FormLabel&gt;
+                      &lt;FormControl&gt;
+                        &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-asset-weight&quot; /&gt;
+                      &lt;/FormControl&gt;
+                      &lt;FormMessage /&gt;
+                    &lt;/FormItem&gt;
+                  )}
+                /&gt;
+                &lt;FormField
+                  control={form.control}
+                  name=&quot;purchaseRate&quot;
+                  render={({ field }) =&gt; (
+                    &lt;FormItem&gt;
+                      &lt;FormLabel className=&quot;text-yellow-400&quot;&gt;Buy Rate/g&lt;/FormLabel&gt;
+                      &lt;FormControl&gt;
+                        &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-asset-purchase-rate&quot; /&gt;
+                      &lt;/FormControl&gt;
+                      &lt;FormMessage /&gt;
+                    &lt;/FormItem&gt;
+                  )}
+                /&gt;
+              &lt;/div&gt;
+            )}
+
+            &lt;Button type=&quot;submit&quot; className=&quot;w-full&quot; disabled={isPending} data-testid=&quot;button-submit-asset&quot;&gt;
+              {isPending ? &lt;Loader2 className=&quot;w-4 h-4 animate-spin&quot; /&gt; : &quot;Save Asset&quot;}
+            &lt;/Button&gt;
+          &lt;/form&gt;
+        &lt;/Form&gt;
+      &lt;/DialogContent&gt;
+    &lt;/Dialog&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f20">
+    <div class="fh">
+      <div class="fp">client/src/components/CreateLiabilityDialog.tsx</div>
+      <div class="fm">189 lines · typescript</div>
+      <button class="cb" onclick="cp('f20')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f20-c">import { useState } from &quot;react&quot;;
+import { useForm } from &quot;react-hook-form&quot;;
+import { zodResolver } from &quot;@hookform/resolvers/zod&quot;;
+import { insertLiabilitySchema, type InsertLiability } from &quot;@shared/schema&quot;;
+import { useCreateLiability } from &quot;@/hooks/use-liabilities&quot;;
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from &quot;@/components/ui/dialog&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Input } from &quot;@/components/ui/input&quot;;
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from &quot;@/components/ui/select&quot;;
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from &quot;@/components/ui/form&quot;;
+import { Loader2, Plus } from &quot;lucide-react&quot;;
+
+const LIABILITY_TYPES = [
+  { value: &quot;CREDIT_CARD&quot;, label: &quot;Credit Card&quot; },
+  { value: &quot;HOME_LOAN&quot;, label: &quot;Home Loan&quot; },
+  { value: &quot;PERSONAL_LOAN&quot;, label: &quot;Personal Loan&quot; },
+  { value: &quot;VEHICLE_LOAN&quot;, label: &quot;Vehicle Loan&quot; },
+  { value: &quot;EDUCATION_LOAN&quot;, label: &quot;Education Loan&quot; },
+  { value: &quot;BORROWED&quot;, label: &quot;Borrowed Money&quot; },
+  { value: &quot;OTHER&quot;, label: &quot;Other&quot; },
+];
+
+export function CreateLiabilityDialog() {
+  const [open, setOpen] = useState(false);
+  const { mutate, isPending } = useCreateLiability();
+
+  const form = useForm&lt;InsertLiability&gt;({
+    resolver: zodResolver(insertLiabilitySchema),
+    defaultValues: {
+      name: &quot;&quot;,
+      outstandingAmount: &quot;0&quot;,
+      type: &quot;CREDIT_CARD&quot;,
+      currency: &quot;INR&quot;,
+      totalLimit: &quot;0&quot;,
+      emi: &quot;0&quot;,
+    },
+  });
+
+  const onSubmit = (data: InsertLiability) =&gt; {
+    mutate(data, {
+      onSuccess: () =&gt; {
+        setOpen(false);
+        form.reset();
+      },
+    });
+  };
+
+  const liabilityType = form.watch(&quot;type&quot;);
+  const showLimit = liabilityType === &quot;CREDIT_CARD&quot;;
+
+  return (
+    &lt;Dialog open={open} onOpenChange={setOpen}&gt;
+      &lt;DialogTrigger asChild&gt;
+        &lt;Button
+          className=&quot;rounded-full w-12 h-12 md:w-auto md:h-10 md:rounded-xl md:px-6 shadow-lg shadow-destructive/25 bg-destructive hover:bg-destructive/90 text-white&quot;
+          data-testid=&quot;button-open-add-liability&quot;
+        &gt;
+          &lt;Plus className=&quot;w-5 h-5 md:mr-2&quot; /&gt;
+          &lt;span className=&quot;hidden md:inline&quot;&gt;Add Liability&lt;/span&gt;
+        &lt;/Button&gt;
+      &lt;/DialogTrigger&gt;
+      &lt;DialogContent className=&quot;sm:max-w-md bg-card border-white/10&quot;&gt;
+        &lt;DialogHeader&gt;
+          &lt;DialogTitle&gt;Add New Liability&lt;/DialogTitle&gt;
+        &lt;/DialogHeader&gt;
+        &lt;Form {...form}&gt;
+          &lt;form onSubmit={form.handleSubmit(onSubmit)} className=&quot;space-y-4&quot;&gt;
+            &lt;FormField
+              control={form.control}
+              name=&quot;name&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Name&lt;/FormLabel&gt;
+                  &lt;FormControl&gt;
+                    &lt;Input
+                      placeholder=&quot;e.g. HDFC Credit Card&quot;
+                      {...field}
+                      className=&quot;bg-background/50 border-white/10&quot;
+                      data-testid=&quot;input-liability-name&quot;
+                    /&gt;
+                  &lt;/FormControl&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;FormField
+              control={form.control}
+              name=&quot;type&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Type&lt;/FormLabel&gt;
+                  &lt;Select onValueChange={field.onChange} defaultValue={field.value}&gt;
+                    &lt;FormControl&gt;
+                      &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;select-liability-type&quot;&gt;
+                        &lt;SelectValue placeholder=&quot;Select type&quot; /&gt;
+                      &lt;/SelectTrigger&gt;
+                    &lt;/FormControl&gt;
+                    &lt;SelectContent&gt;
+                      {LIABILITY_TYPES.map(t =&gt; (
+                        &lt;SelectItem key={t.value} value={t.value}&gt;{t.label}&lt;/SelectItem&gt;
+                      ))}
+                    &lt;/SelectContent&gt;
+                  &lt;/Select&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;div className=&quot;grid grid-cols-2 gap-4&quot;&gt;
+              &lt;FormField
+                control={form.control}
+                name=&quot;outstandingAmount&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Outstanding&lt;/FormLabel&gt;
+                    &lt;FormControl&gt;
+                      &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-liability-amount&quot; /&gt;
+                    &lt;/FormControl&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+
+              &lt;FormField
+                control={form.control}
+                name=&quot;currency&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Currency&lt;/FormLabel&gt;
+                    &lt;Select onValueChange={field.onChange} defaultValue={field.value}&gt;
+                      &lt;FormControl&gt;
+                        &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot;&gt;
+                          &lt;SelectValue placeholder=&quot;Currency&quot; /&gt;
+                        &lt;/SelectTrigger&gt;
+                      &lt;/FormControl&gt;
+                      &lt;SelectContent&gt;
+                        &lt;SelectItem value=&quot;INR&quot;&gt;INR (₹)&lt;/SelectItem&gt;
+                        &lt;SelectItem value=&quot;AED&quot;&gt;AED (د.إ)&lt;/SelectItem&gt;
+                        &lt;SelectItem value=&quot;USD&quot;&gt;USD ($)&lt;/SelectItem&gt;
+                      &lt;/SelectContent&gt;
+                    &lt;/Select&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;grid grid-cols-2 gap-4&quot;&gt;
+              {showLimit &amp;&amp; (
+                &lt;FormField
+                  control={form.control}
+                  name=&quot;totalLimit&quot;
+                  render={({ field }) =&gt; (
+                    &lt;FormItem&gt;
+                      &lt;FormLabel&gt;Credit Limit&lt;/FormLabel&gt;
+                      &lt;FormControl&gt;
+                        &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-liability-limit&quot; /&gt;
+                      &lt;/FormControl&gt;
+                      &lt;FormMessage /&gt;
+                    &lt;/FormItem&gt;
+                  )}
+                /&gt;
+              )}
+              &lt;FormField
+                control={form.control}
+                name=&quot;emi&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;EMI / Min Payment&lt;/FormLabel&gt;
+                    &lt;FormControl&gt;
+                      &lt;Input type=&quot;number&quot; step=&quot;0.01&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;input-liability-emi&quot; /&gt;
+                    &lt;/FormControl&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;Button type=&quot;submit&quot; variant=&quot;destructive&quot; className=&quot;w-full&quot; disabled={isPending} data-testid=&quot;button-submit-liability&quot;&gt;
+              {isPending ? &lt;Loader2 className=&quot;w-4 h-4 animate-spin&quot; /&gt; : &quot;Save Liability&quot;}
+            &lt;/Button&gt;
+          &lt;/form&gt;
+        &lt;/Form&gt;
+      &lt;/DialogContent&gt;
+    &lt;/Dialog&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f21">
+    <div class="fh">
+      <div class="fp">client/src/components/CreateTransactionDialog.tsx</div>
+      <div class="fm">173 lines · typescript</div>
+      <button class="cb" onclick="cp('f21')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f21-c">import { useEffect } from &quot;react&quot;;
+import { useForm } from &quot;react-hook-form&quot;;
+import { zodResolver } from &quot;@hookform/resolvers/zod&quot;;
+import { insertTransactionSchema, type InsertTransaction } from &quot;@shared/schema&quot;;
+import { useCreateTransaction } from &quot;@/hooks/use-transactions&quot;;
+import { useQueryClient } from &quot;@tanstack/react-query&quot;;
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from &quot;@/components/ui/dialog&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Input } from &quot;@/components/ui/input&quot;;
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from &quot;@/components/ui/select&quot;;
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from &quot;@/components/ui/form&quot;;
+import { Loader2 } from &quot;lucide-react&quot;;
+import { api } from &quot;@shared/routes&quot;;
+
+const INCOME_CATEGORIES = [
+  &quot;Salary&quot;, &quot;Freelancing&quot;, &quot;Business&quot;, &quot;Rental Income&quot;,
+  &quot;Interest&quot;, &quot;Dividends&quot;, &quot;Bonus&quot;, &quot;Gift&quot;, &quot;Other Income&quot;
+];
+
+const EXPENSE_CATEGORIES = [
+  &quot;Food&quot;, &quot;Groceries&quot;, &quot;Transport&quot;, &quot;Fuel&quot;, &quot;Shopping&quot;,
+  &quot;Rent&quot;, &quot;Electricity&quot;, &quot;Internet&quot;, &quot;Mobile&quot;, &quot;Insurance&quot;,
+  &quot;Medical&quot;, &quot;Entertainment&quot;, &quot;Education&quot;, &quot;Travel&quot;,
+  &quot;Investment&quot;, &quot;Charity&quot;, &quot;EMI&quot;, &quot;Miscellaneous&quot;
+];
+
+interface Props {
+  open: boolean;
+  onOpenChange: (open: boolean) =&gt; void;
+  defaultType?: &quot;INCOME&quot; | &quot;EXPENSE&quot;;
+}
+
+export function CreateTransactionDialog({ open, onOpenChange, defaultType = &quot;EXPENSE&quot; }: Props) {
+  const { mutate, isPending } = useCreateTransaction();
+  const queryClient = useQueryClient();
+
+  const form = useForm&lt;InsertTransaction&gt;({
+    resolver: zodResolver(insertTransactionSchema),
+    defaultValues: {
+      amount: &quot;0&quot;,
+      type: defaultType,
+      category: &quot;&quot;,
+      description: &quot;&quot;,
+    },
+  });
+
+  const txType = form.watch(&quot;type&quot;);
+  const categories = txType === &quot;INCOME&quot; ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
+
+  useEffect(() =&gt; {
+    if (open) {
+      form.reset({ amount: &quot;0&quot;, type: defaultType, category: &quot;&quot;, description: &quot;&quot; });
+    }
+  }, [open, defaultType]);
+
+  const onSubmit = (data: InsertTransaction) =&gt; {
+    mutate(data, {
+      onSuccess: () =&gt; {
+        onOpenChange(false);
+        queryClient.invalidateQueries({ queryKey: [api.dashboard.get.path] });
+      },
+    });
+  };
+
+  return (
+    &lt;Dialog open={open} onOpenChange={onOpenChange}&gt;
+      &lt;DialogContent className=&quot;sm:max-w-md bg-card border-white/10&quot;&gt;
+        &lt;DialogHeader&gt;
+          &lt;DialogTitle&gt;{defaultType === &quot;INCOME&quot; ? &quot;Add Income&quot; : &quot;Add Expense&quot;}&lt;/DialogTitle&gt;
+        &lt;/DialogHeader&gt;
+        &lt;Form {...form}&gt;
+          &lt;form onSubmit={form.handleSubmit(onSubmit)} className=&quot;space-y-4&quot;&gt;
+            &lt;FormField
+              control={form.control}
+              name=&quot;type&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Type&lt;/FormLabel&gt;
+                  &lt;Select onValueChange={field.onChange} value={field.value}&gt;
+                    &lt;FormControl&gt;
+                      &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;select-tx-type&quot;&gt;
+                        &lt;SelectValue placeholder=&quot;Select type&quot; /&gt;
+                      &lt;/SelectTrigger&gt;
+                    &lt;/FormControl&gt;
+                    &lt;SelectContent&gt;
+                      &lt;SelectItem value=&quot;INCOME&quot;&gt;Income&lt;/SelectItem&gt;
+                      &lt;SelectItem value=&quot;EXPENSE&quot;&gt;Expense&lt;/SelectItem&gt;
+                    &lt;/SelectContent&gt;
+                  &lt;/Select&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;FormField
+              control={form.control}
+              name=&quot;category&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Category&lt;/FormLabel&gt;
+                  &lt;Select onValueChange={field.onChange} value={field.value}&gt;
+                    &lt;FormControl&gt;
+                      &lt;SelectTrigger className=&quot;bg-background/50 border-white/10&quot; data-testid=&quot;select-tx-category&quot;&gt;
+                        &lt;SelectValue placeholder=&quot;Select category&quot; /&gt;
+                      &lt;/SelectTrigger&gt;
+                    &lt;/FormControl&gt;
+                    &lt;SelectContent&gt;
+                      {categories.map(cat =&gt; (
+                        &lt;SelectItem key={cat} value={cat}&gt;{cat}&lt;/SelectItem&gt;
+                      ))}
+                    &lt;/SelectContent&gt;
+                  &lt;/Select&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;FormField
+              control={form.control}
+              name=&quot;amount&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Amount&lt;/FormLabel&gt;
+                  &lt;FormControl&gt;
+                    &lt;Input
+                      type=&quot;number&quot;
+                      step=&quot;0.01&quot;
+                      placeholder=&quot;0.00&quot;
+                      {...field}
+                      className=&quot;bg-background/50 border-white/10&quot;
+                      data-testid=&quot;input-tx-amount&quot;
+                    /&gt;
+                  &lt;/FormControl&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;FormField
+              control={form.control}
+              name=&quot;description&quot;
+              render={({ field }) =&gt; (
+                &lt;FormItem&gt;
+                  &lt;FormLabel&gt;Description (optional)&lt;/FormLabel&gt;
+                  &lt;FormControl&gt;
+                    &lt;Input
+                      placeholder=&quot;e.g. Monthly salary&quot;
+                      {...field}
+                      value={field.value ?? &quot;&quot;}
+                      className=&quot;bg-background/50 border-white/10&quot;
+                      data-testid=&quot;input-tx-description&quot;
+                    /&gt;
+                  &lt;/FormControl&gt;
+                  &lt;FormMessage /&gt;
+                &lt;/FormItem&gt;
+              )}
+            /&gt;
+
+            &lt;Button
+              type=&quot;submit&quot;
+              className={`w-full ${txType === &quot;INCOME&quot; ? &quot;bg-green-600 hover:bg-green-700&quot; : &quot;bg-red-600 hover:bg-red-700&quot;}`}
+              disabled={isPending}
+              data-testid=&quot;button-submit-transaction&quot;
+            &gt;
+              {isPending ? &lt;Loader2 className=&quot;w-4 h-4 animate-spin&quot; /&gt; : `Save ${txType === &quot;INCOME&quot; ? &quot;Income&quot; : &quot;Expense&quot;}`}
+            &lt;/Button&gt;
+          &lt;/form&gt;
+        &lt;/Form&gt;
+      &lt;/DialogContent&gt;
+    &lt;/Dialog&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f22">
+    <div class="fh">
+      <div class="fp">client/src/pages/Auth.tsx</div>
+      <div class="fm">141 lines · typescript</div>
+      <button class="cb" onclick="cp('f22')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f22-c">import { useState } from &quot;react&quot;;
+import { useAuth } from &quot;@/hooks/use-auth&quot;;
+import { useForm } from &quot;react-hook-form&quot;;
+import { zodResolver } from &quot;@hookform/resolvers/zod&quot;;
+import { z } from &quot;zod&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Input } from &quot;@/components/ui/input&quot;;
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from &quot;@/components/ui/form&quot;;
+import { Loader2, TrendingUp } from &quot;lucide-react&quot;;
+import { motion } from &quot;framer-motion&quot;;
+
+const loginSchema = z.object({
+  username: z.string().min(1, &quot;Username is required&quot;),
+  password: z.string().min(6, &quot;Password must be at least 6 characters&quot;),
+});
+
+const registerSchema = loginSchema.extend({
+  name: z.string().min(2, &quot;Name is required&quot;),
+  preferredCurrency: z.enum([&quot;INR&quot;, &quot;AED&quot;, &quot;USD&quot;]).default(&quot;INR&quot;),
+});
+
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(true);
+  const { login, register, isLoggingIn, isRegistering } = useAuth();
+  const [error, setError] = useState&lt;string | null&gt;(null);
+
+  const form = useForm({
+    resolver: zodResolver(isLogin ? loginSchema : registerSchema),
+    defaultValues: {
+      username: &quot;&quot;,
+      password: &quot;&quot;,
+      name: &quot;&quot;,
+      preferredCurrency: &quot;INR&quot;,
+    },
+  });
+
+  const onSubmit = async (data: any) =&gt; {
+    setError(null);
+    try {
+      if (isLogin) {
+        await login(data);
+      } else {
+        await register(data);
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background flex flex-col items-center justify-center p-6 relative overflow-hidden&quot;&gt;
+      {/* Background Decor */}
+      &lt;div className=&quot;absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[128px]&quot; /&gt;
+      &lt;div className=&quot;absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]&quot; /&gt;
+
+      &lt;motion.div 
+         initial={{ opacity: 0, y: 20 }}
+         animate={{ opacity: 1, y: 0 }}
+         className=&quot;w-full max-w-md space-y-8 z-10&quot;
+      &gt;
+        &lt;div className=&quot;text-center space-y-2&quot;&gt;
+          &lt;div className=&quot;w-16 h-16 bg-primary rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-primary/30 mb-6&quot;&gt;
+             &lt;TrendingUp className=&quot;w-8 h-8 text-white&quot; /&gt;
+          &lt;/div&gt;
+          &lt;h1 className=&quot;text-3xl font-display font-bold text-white tracking-tight&quot;&gt;NetWorth&lt;/h1&gt;
+          &lt;p className=&quot;text-muted-foreground&quot;&gt;Master your wealth.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div className=&quot;bg-card/50 backdrop-blur-xl border border-white/5 rounded-2xl p-6 shadow-xl&quot;&gt;
+          &lt;Form {...form}&gt;
+            &lt;form onSubmit={form.handleSubmit(onSubmit)} className=&quot;space-y-4&quot;&gt;
+              {error &amp;&amp; (
+                &lt;div className=&quot;p-3 rounded-lg bg-destructive/10 text-destructive text-sm font-medium text-center&quot;&gt;
+                  {error}
+                &lt;/div&gt;
+              )}
+              
+              {!isLogin &amp;&amp; (
+                &lt;FormField
+                  control={form.control}
+                  name=&quot;name&quot;
+                  render={({ field }) =&gt; (
+                    &lt;FormItem&gt;
+                      &lt;FormLabel&gt;Full Name&lt;/FormLabel&gt;
+                      &lt;FormControl&gt;
+                        &lt;Input placeholder=&quot;John Doe&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; /&gt;
+                      &lt;/FormControl&gt;
+                      &lt;FormMessage /&gt;
+                    &lt;/FormItem&gt;
+                  )}
+                /&gt;
+              )}
+
+              &lt;FormField
+                control={form.control}
+                name=&quot;username&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Username&lt;/FormLabel&gt;
+                    &lt;FormControl&gt;
+                      &lt;Input placeholder=&quot;john@example.com&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; /&gt;
+                    &lt;/FormControl&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+
+              &lt;FormField
+                control={form.control}
+                name=&quot;password&quot;
+                render={({ field }) =&gt; (
+                  &lt;FormItem&gt;
+                    &lt;FormLabel&gt;Password&lt;/FormLabel&gt;
+                    &lt;FormControl&gt;
+                      &lt;Input type=&quot;password&quot; {...field} className=&quot;bg-background/50 border-white/10&quot; /&gt;
+                    &lt;/FormControl&gt;
+                    &lt;FormMessage /&gt;
+                  &lt;/FormItem&gt;
+                )}
+              /&gt;
+
+              &lt;Button type=&quot;submit&quot; className=&quot;w-full h-11 text-base mt-2&quot; disabled={isLoggingIn || isRegistering}&gt;
+                {(isLoggingIn || isRegistering) ? &lt;Loader2 className=&quot;w-5 h-5 animate-spin&quot; /&gt; : (isLogin ? &quot;Sign In&quot; : &quot;Create Account&quot;)}
+              &lt;/Button&gt;
+            &lt;/form&gt;
+          &lt;/Form&gt;
+
+          &lt;div className=&quot;mt-6 text-center&quot;&gt;
+            &lt;button 
+              onClick={() =&gt; { setIsLogin(!isLogin); form.reset(); setError(null); }}
+              className=&quot;text-sm text-primary hover:underline font-medium&quot;
+            &gt;
+              {isLogin ? &quot;New here? Create account&quot; : &quot;Already have an account? Sign in&quot;}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/motion.div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f23">
+    <div class="fh">
+      <div class="fp">client/src/pages/Dashboard.tsx</div>
+      <div class="fm">221 lines · typescript</div>
+      <button class="cb" onclick="cp('f23')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f23-c">import { useState } from &quot;react&quot;;
+import { useDashboard } from &quot;@/hooks/use-dashboard&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { Card, CardContent, CardHeader, CardTitle } from &quot;@/components/ui/card&quot;;
+import { Loader2, TrendingUp, Wallet, ShieldAlert, ArrowUpRight, ArrowDownRight, BarChart2 } from &quot;lucide-react&quot;;
+import { motion } from &quot;framer-motion&quot;;
+import { CreateTransactionDialog } from &quot;@/components/CreateTransactionDialog&quot;;
+import { Link } from &quot;wouter&quot;;
+
+export default function Dashboard() {
+  const { data, isLoading, error } = useDashboard();
+  const [txType, setTxType] = useState&lt;&quot;INCOME&quot; | &quot;EXPENSE&quot; | null&gt;(null);
+  const [txOpen, setTxOpen] = useState(false);
+
+  if (isLoading) {
+    return (
+      &lt;div className=&quot;flex h-screen items-center justify-center bg-background&quot;&gt;
+        &lt;Loader2 className=&quot;w-10 h-10 animate-spin text-primary&quot; /&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  if (error || !data) {
+    return (
+      &lt;div className=&quot;flex h-screen items-center justify-center bg-background text-destructive&quot;&gt;
+        Error loading dashboard.
+      &lt;/div&gt;
+    );
+  }
+
+  const formatCurrency = (amount: number) =&gt; {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: data.currency,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 }
+  };
+
+  const savings = data.monthlyIncome - data.monthlyExpenses;
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 font-sans text-foreground&quot;&gt;
+      {/* Header */}
+      &lt;header className=&quot;px-6 pt-10 pb-6 bg-gradient-to-b from-primary/10 to-transparent&quot;&gt;
+        &lt;div className=&quot;flex items-center justify-between mb-4&quot;&gt;
+          &lt;div&gt;
+            &lt;p className=&quot;text-sm text-muted-foreground font-medium&quot;&gt;Total Net Worth&lt;/p&gt;
+            &lt;div className=&quot;mt-1 text-4xl font-bold tracking-tight text-white font-display&quot; data-testid=&quot;text-net-worth&quot;&gt;
+              {formatCurrency(data.netWorth)}
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;Link href=&quot;/settings&quot;&gt;
+            &lt;div className=&quot;h-11 w-11 rounded-full bg-primary/20 flex items-center justify-center cursor-pointer hover:bg-primary/30 transition-colors border border-primary/20&quot;&gt;
+              &lt;span className=&quot;font-bold text-primary text-sm&quot;&gt;NW&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/Link&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+
+      &lt;motion.main
+        variants={container}
+        initial=&quot;hidden&quot;
+        animate=&quot;show&quot;
+        className=&quot;px-4 space-y-5&quot;
+      &gt;
+        {/* Assets vs Liabilities */}
+        &lt;div className=&quot;grid grid-cols-2 gap-3&quot;&gt;
+          &lt;motion.div variants={item}&gt;
+            &lt;Card className=&quot;bg-card border border-green-500/10 shadow-lg shadow-black/20&quot;&gt;
+              &lt;CardContent className=&quot;p-4&quot;&gt;
+                &lt;div className=&quot;flex items-center gap-2 mb-2&quot;&gt;
+                  &lt;div className=&quot;p-1.5 rounded-lg bg-green-500/10&quot;&gt;
+                    &lt;Wallet className=&quot;w-3.5 h-3.5 text-green-500&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;span className=&quot;text-xs font-medium text-muted-foreground&quot;&gt;Assets&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;text-xl font-bold text-green-400&quot; data-testid=&quot;text-total-assets&quot;&gt;
+                  {formatCurrency(data.totalAssets)}
+                &lt;/div&gt;
+              &lt;/CardContent&gt;
+            &lt;/Card&gt;
+          &lt;/motion.div&gt;
+
+          &lt;motion.div variants={item}&gt;
+            &lt;Card className=&quot;bg-card border border-red-500/10 shadow-lg shadow-black/20&quot;&gt;
+              &lt;CardContent className=&quot;p-4&quot;&gt;
+                &lt;div className=&quot;flex items-center gap-2 mb-2&quot;&gt;
+                  &lt;div className=&quot;p-1.5 rounded-lg bg-red-500/10&quot;&gt;
+                    &lt;ShieldAlert className=&quot;w-3.5 h-3.5 text-red-500&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;span className=&quot;text-xs font-medium text-muted-foreground&quot;&gt;Liabilities&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;text-xl font-bold text-red-400&quot; data-testid=&quot;text-total-liabilities&quot;&gt;
+                  {formatCurrency(data.totalLiabilities)}
+                &lt;/div&gt;
+              &lt;/CardContent&gt;
+            &lt;/Card&gt;
+          &lt;/motion.div&gt;
+        &lt;/div&gt;
+
+        {/* Monthly Summary */}
+        &lt;motion.div variants={item}&gt;
+          &lt;h3 className=&quot;text-xs uppercase font-semibold text-muted-foreground mb-2 px-1&quot;&gt;This Month&lt;/h3&gt;
+          &lt;div className=&quot;grid grid-cols-3 gap-2&quot;&gt;
+            &lt;Card className=&quot;bg-card border-white/5&quot;&gt;
+              &lt;CardContent className=&quot;p-3 text-center&quot;&gt;
+                &lt;ArrowUpRight className=&quot;w-4 h-4 text-green-400 mx-auto mb-1&quot; /&gt;
+                &lt;p className=&quot;text-[10px] text-muted-foreground&quot;&gt;Income&lt;/p&gt;
+                &lt;p className=&quot;text-sm font-bold text-green-400&quot; data-testid=&quot;text-monthly-income&quot;&gt;
+                  {formatCurrency(data.monthlyIncome)}
+                &lt;/p&gt;
+              &lt;/CardContent&gt;
+            &lt;/Card&gt;
+            &lt;Card className=&quot;bg-card border-white/5&quot;&gt;
+              &lt;CardContent className=&quot;p-3 text-center&quot;&gt;
+                &lt;ArrowDownRight className=&quot;w-4 h-4 text-red-400 mx-auto mb-1&quot; /&gt;
+                &lt;p className=&quot;text-[10px] text-muted-foreground&quot;&gt;Expenses&lt;/p&gt;
+                &lt;p className=&quot;text-sm font-bold text-red-400&quot; data-testid=&quot;text-monthly-expenses&quot;&gt;
+                  {formatCurrency(data.monthlyExpenses)}
+                &lt;/p&gt;
+              &lt;/CardContent&gt;
+            &lt;/Card&gt;
+            &lt;Card className={`border-white/5 ${savings &gt;= 0 ? 'bg-green-500/5' : 'bg-red-500/5'}`}&gt;
+              &lt;CardContent className=&quot;p-3 text-center&quot;&gt;
+                &lt;TrendingUp className={`w-4 h-4 mx-auto mb-1 ${savings &gt;= 0 ? 'text-green-400' : 'text-red-400'}`} /&gt;
+                &lt;p className=&quot;text-[10px] text-muted-foreground&quot;&gt;Savings&lt;/p&gt;
+                &lt;p className={`text-sm font-bold ${savings &gt;= 0 ? 'text-green-400' : 'text-red-400'}`} data-testid=&quot;text-monthly-savings&quot;&gt;
+                  {formatCurrency(savings)}
+                &lt;/p&gt;
+              &lt;/CardContent&gt;
+            &lt;/Card&gt;
+          &lt;/div&gt;
+        &lt;/motion.div&gt;
+
+        {/* Gold Card */}
+        {data.goldMetrics &amp;&amp; (
+          &lt;motion.div variants={item}&gt;
+            &lt;div className=&quot;relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/10 border border-yellow-500/20 p-5&quot;&gt;
+              &lt;div className=&quot;flex justify-between items-start mb-3&quot;&gt;
+                &lt;div&gt;
+                  &lt;h3 className=&quot;text-yellow-400 font-bold flex items-center gap-2 text-sm&quot;&gt;
+                    &lt;TrendingUp className=&quot;w-4 h-4&quot; /&gt; Gold Portfolio
+                  &lt;/h3&gt;
+                  &lt;p className=&quot;text-xs text-yellow-500/60 mt-0.5&quot;&gt;
+                    {data.goldMetrics.totalWeight}g Holdings
+                  &lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div className={`text-xs font-semibold px-2.5 py-1 rounded-full ${data.goldMetrics.plPercent &gt;= 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}&gt;
+                  {data.goldMetrics.plPercent &gt;= 0 ? '+' : ''}{data.goldMetrics.plPercent.toFixed(2)}%
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;grid grid-cols-2 gap-3&quot;&gt;
+                &lt;div&gt;
+                  &lt;span className=&quot;text-[10px] text-muted-foreground uppercase tracking-wider&quot;&gt;Current Value&lt;/span&gt;
+                  &lt;div className=&quot;text-base font-bold text-foreground&quot;&gt;
+                    {formatCurrency(data.goldMetrics.currentValue)}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                  &lt;span className=&quot;text-[10px] text-muted-foreground uppercase tracking-wider&quot;&gt;Invested&lt;/span&gt;
+                  &lt;div className=&quot;text-base font-medium text-muted-foreground&quot;&gt;
+                    {formatCurrency(data.goldMetrics.investmentValue)}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/motion.div&gt;
+        )}
+
+        {/* Quick Actions */}
+        &lt;motion.div variants={item} className=&quot;space-y-3&quot;&gt;
+          &lt;h3 className=&quot;text-xs uppercase font-semibold text-muted-foreground px-1&quot;&gt;Quick Actions&lt;/h3&gt;
+          &lt;div className=&quot;grid grid-cols-2 gap-3&quot;&gt;
+            &lt;button
+              data-testid=&quot;button-add-income&quot;
+              className=&quot;p-4 rounded-xl bg-green-500/10 hover:bg-green-500/20 transition-colors border border-green-500/20 flex flex-col items-center gap-2&quot;
+              onClick={() =&gt; { setTxType(&quot;INCOME&quot;); setTxOpen(true); }}
+            &gt;
+              &lt;ArrowUpRight className=&quot;w-6 h-6 text-green-400&quot; /&gt;
+              &lt;span className=&quot;text-sm font-medium text-green-300&quot;&gt;Add Income&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              data-testid=&quot;button-add-expense&quot;
+              className=&quot;p-4 rounded-xl bg-red-500/10 hover:bg-red-500/20 transition-colors border border-red-500/20 flex flex-col items-center gap-2&quot;
+              onClick={() =&gt; { setTxType(&quot;EXPENSE&quot;); setTxOpen(true); }}
+            &gt;
+              &lt;ArrowDownRight className=&quot;w-6 h-6 text-red-400&quot; /&gt;
+              &lt;span className=&quot;text-sm font-medium text-red-300&quot;&gt;Add Expense&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;Link href=&quot;/reports&quot;&gt;
+            &lt;button className=&quot;w-full p-3.5 rounded-xl bg-secondary/40 hover:bg-secondary/60 transition-colors border border-white/5 flex items-center justify-center gap-2&quot;&gt;
+              &lt;BarChart2 className=&quot;w-4 h-4 text-primary&quot; /&gt;
+              &lt;span className=&quot;text-sm font-medium text-muted-foreground&quot;&gt;View Reports &amp; Charts&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/Link&gt;
+        &lt;/motion.div&gt;
+      &lt;/motion.main&gt;
+
+      &lt;CreateTransactionDialog
+        open={txOpen}
+        onOpenChange={setTxOpen}
+        defaultType={txType ?? &quot;EXPENSE&quot;}
+      /&gt;
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f24">
+    <div class="fh">
+      <div class="fp">client/src/pages/Assets.tsx</div>
+      <div class="fm">94 lines · typescript</div>
+      <button class="cb" onclick="cp('f24')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f24-c">import { useAssets, useDeleteAsset } from &quot;@/hooks/use-assets&quot;;
+import { CreateAssetDialog } from &quot;@/components/CreateAssetDialog&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { PageHeader } from &quot;@/components/PageHeader&quot;;
+import { Card } from &quot;@/components/ui/card&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Trash2, TrendingUp, Building2, Wallet, CircleDollarSign } from &quot;lucide-react&quot;;
+import { formatDistanceToNow } from &quot;date-fns&quot;;
+import { motion, AnimatePresence } from &quot;framer-motion&quot;;
+
+export default function Assets() {
+  const { data: assets, isLoading } = useAssets();
+  const { mutate: deleteAsset } = useDeleteAsset();
+
+  const getIcon = (type: string) =&gt; {
+    switch (type) {
+      case 'BANK': return &lt;Building2 className=&quot;w-5 h-5 text-blue-400&quot; /&gt;;
+      case 'GOLD': return &lt;TrendingUp className=&quot;w-5 h-5 text-yellow-400&quot; /&gt;;
+      case 'CASH': return &lt;Wallet className=&quot;w-5 h-5 text-green-400&quot; /&gt;;
+      default: return &lt;CircleDollarSign className=&quot;w-5 h-5 text-purple-400&quot; /&gt;;
+    }
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 px-4 pt-8&quot;&gt;
+      &lt;PageHeader 
+        title=&quot;Assets&quot; 
+        subtitle=&quot;Track your wealth sources&quot;
+        action={&lt;CreateAssetDialog /&gt;}
+      /&gt;
+
+      {isLoading ? (
+        &lt;div className=&quot;space-y-4&quot;&gt;
+          {[1,2,3].map(i =&gt; &lt;div key={i} className=&quot;h-20 bg-secondary/30 rounded-2xl animate-pulse&quot; /&gt;)}
+        &lt;/div&gt;
+      ) : (
+        &lt;div className=&quot;space-y-4&quot;&gt;
+          &lt;AnimatePresence&gt;
+            {assets?.map((asset) =&gt; (
+              &lt;motion.div
+                key={asset.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                layout
+              &gt;
+                &lt;Card className=&quot;glass-card hover:bg-card/50 transition-colors group&quot;&gt;
+                  &lt;div className=&quot;p-4 flex items-center justify-between&quot;&gt;
+                    &lt;div className=&quot;flex items-center space-x-4&quot;&gt;
+                      &lt;div className=&quot;w-10 h-10 rounded-full bg-background flex items-center justify-center border border-white/5&quot;&gt;
+                        {getIcon(asset.type)}
+                      &lt;/div&gt;
+                      &lt;div&gt;
+                        &lt;h3 className=&quot;font-semibold text-foreground&quot;&gt;{asset.name}&lt;/h3&gt;
+                        &lt;p className=&quot;text-xs text-muted-foreground&quot;&gt;{asset.type}&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;text-right&quot;&gt;
+                      &lt;div className=&quot;font-bold text-lg&quot;&gt;
+                        {new Intl.NumberFormat('en-IN', { style: 'currency', currency: asset.currency || 'INR', maximumFractionDigits: 0 }).format(Number(asset.value))}
+                      &lt;/div&gt;
+                      &lt;div className=&quot;flex justify-end gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity&quot;&gt;
+                         &lt;Button 
+                            variant=&quot;ghost&quot; 
+                            size=&quot;icon&quot; 
+                            className=&quot;h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10&quot;
+                            onClick={() =&gt; {
+                                if(confirm(&quot;Are you sure?&quot;)) deleteAsset(asset.id);
+                            }}
+                          &gt;
+                           &lt;Trash2 className=&quot;w-3 h-3&quot; /&gt;
+                         &lt;/Button&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/Card&gt;
+              &lt;/motion.div&gt;
+            ))}
+          &lt;/AnimatePresence&gt;
+          
+          {assets?.length === 0 &amp;&amp; (
+            &lt;div className=&quot;text-center py-12 text-muted-foreground&quot;&gt;
+              &lt;Wallet className=&quot;w-12 h-12 mx-auto mb-4 opacity-20&quot; /&gt;
+              &lt;p&gt;No assets yet. Add one to get started.&lt;/p&gt;
+            &lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      )}
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f25">
+    <div class="fh">
+      <div class="fp">client/src/pages/Liabilities.tsx</div>
+      <div class="fm">111 lines · typescript</div>
+      <button class="cb" onclick="cp('f25')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f25-c">import { useLiabilities, useDeleteLiability } from &quot;@/hooks/use-liabilities&quot;;
+import { CreateLiabilityDialog } from &quot;@/components/CreateLiabilityDialog&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { PageHeader } from &quot;@/components/PageHeader&quot;;
+import { Card } from &quot;@/components/ui/card&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Trash2, CreditCard, Landmark } from &quot;lucide-react&quot;;
+import { motion, AnimatePresence } from &quot;framer-motion&quot;;
+import { Progress } from &quot;@/components/ui/progress&quot;;
+
+export default function Liabilities() {
+  const { data: liabilities, isLoading } = useLiabilities();
+  const { mutate: deleteLiability } = useDeleteLiability();
+
+  const getIcon = (type: string) =&gt; {
+    switch (type) {
+      case 'CREDIT_CARD': return &lt;CreditCard className=&quot;w-5 h-5 text-pink-400&quot; /&gt;;
+      case 'LOAN': return &lt;Landmark className=&quot;w-5 h-5 text-orange-400&quot; /&gt;;
+      default: return &lt;CreditCard className=&quot;w-5 h-5 text-gray-400&quot; /&gt;;
+    }
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 px-4 pt-8&quot;&gt;
+      &lt;PageHeader 
+        title=&quot;Liabilities&quot; 
+        subtitle=&quot;Manage your debts&quot;
+        action={&lt;CreateLiabilityDialog /&gt;}
+      /&gt;
+
+      {isLoading ? (
+        &lt;div className=&quot;space-y-4&quot;&gt;
+          {[1,2,3].map(i =&gt; &lt;div key={i} className=&quot;h-20 bg-secondary/30 rounded-2xl animate-pulse&quot; /&gt;)}
+        &lt;/div&gt;
+      ) : (
+        &lt;div className=&quot;space-y-4&quot;&gt;
+          &lt;AnimatePresence&gt;
+            {liabilities?.map((liability) =&gt; {
+              const outstanding = Number(liability.outstandingAmount);
+              const limit = liability.totalLimit ? Number(liability.totalLimit) : 0;
+              const usagePercent = limit &gt; 0 ? (outstanding / limit) * 100 : 0;
+
+              return (
+                &lt;motion.div
+                  key={liability.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  layout
+                &gt;
+                  &lt;Card className=&quot;glass-card hover:bg-card/50 transition-colors group&quot;&gt;
+                    &lt;div className=&quot;p-4&quot;&gt;
+                      &lt;div className=&quot;flex items-center justify-between mb-3&quot;&gt;
+                        &lt;div className=&quot;flex items-center space-x-4&quot;&gt;
+                          &lt;div className=&quot;w-10 h-10 rounded-full bg-background flex items-center justify-center border border-white/5&quot;&gt;
+                            {getIcon(liability.type)}
+                          &lt;/div&gt;
+                          &lt;div&gt;
+                            &lt;h3 className=&quot;font-semibold text-foreground&quot;&gt;{liability.name}&lt;/h3&gt;
+                            &lt;p className=&quot;text-xs text-muted-foreground&quot;&gt;{liability.type}&lt;/p&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                         &lt;div className=&quot;text-right&quot;&gt;
+                          &lt;div className=&quot;font-bold text-lg text-red-400&quot;&gt;
+                            {new Intl.NumberFormat('en-IN', { style: 'currency', currency: liability.currency || 'INR', maximumFractionDigits: 0 }).format(outstanding)}
+                          &lt;/div&gt;
+                           &lt;div className=&quot;flex justify-end gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity&quot;&gt;
+                             &lt;Button 
+                                variant=&quot;ghost&quot; 
+                                size=&quot;icon&quot; 
+                                className=&quot;h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10&quot;
+                                onClick={() =&gt; {
+                                    if(confirm(&quot;Are you sure?&quot;)) deleteLiability(liability.id);
+                                }}
+                              &gt;
+                               &lt;Trash2 className=&quot;w-3 h-3&quot; /&gt;
+                             &lt;/Button&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                      
+                      {limit &gt; 0 &amp;&amp; (
+                        &lt;div className=&quot;space-y-1&quot;&gt;
+                          &lt;div className=&quot;flex justify-between text-xs text-muted-foreground&quot;&gt;
+                            &lt;span&gt;Credit Usage&lt;/span&gt;
+                            &lt;span&gt;{Math.round(usagePercent)}%&lt;/span&gt;
+                          &lt;/div&gt;
+                          &lt;Progress value={usagePercent} className=&quot;h-1.5 bg-secondary&quot; indicatorClassName={usagePercent &gt; 80 ? 'bg-red-500' : 'bg-primary'} /&gt;
+                        &lt;/div&gt;
+                      )}
+                    &lt;/div&gt;
+                  &lt;/Card&gt;
+                &lt;/motion.div&gt;
+              );
+            })}
+          &lt;/AnimatePresence&gt;
+
+          {liabilities?.length === 0 &amp;&amp; (
+            &lt;div className=&quot;text-center py-12 text-muted-foreground&quot;&gt;
+              &lt;CreditCard className=&quot;w-12 h-12 mx-auto mb-4 opacity-20&quot; /&gt;
+              &lt;p&gt;Debt free? Great job!&lt;/p&gt;
+            &lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      )}
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f26">
+    <div class="fh">
+      <div class="fp">client/src/pages/Transactions.tsx</div>
+      <div class="fm">191 lines · typescript</div>
+      <button class="cb" onclick="cp('f26')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f26-c">import { useState } from &quot;react&quot;;
+import { useTransactions, useDeleteTransaction } from &quot;@/hooks/use-transactions&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { PageHeader } from &quot;@/components/PageHeader&quot;;
+import { Card } from &quot;@/components/ui/card&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Badge } from &quot;@/components/ui/badge&quot;;
+import { CreateTransactionDialog } from &quot;@/components/CreateTransactionDialog&quot;;
+import { Trash2, ArrowUpRight, ArrowDownRight, Plus, Search } from &quot;lucide-react&quot;;
+import { Input } from &quot;@/components/ui/input&quot;;
+import { motion, AnimatePresence } from &quot;framer-motion&quot;;
+import { format } from &quot;date-fns&quot;;
+
+export default function Transactions() {
+  const { data: transactions, isLoading } = useTransactions();
+  const { mutate: deleteTransaction } = useDeleteTransaction();
+  const [open, setOpen] = useState(false);
+  const [defaultType, setDefaultType] = useState&lt;&quot;INCOME&quot; | &quot;EXPENSE&quot;&gt;(&quot;EXPENSE&quot;);
+  const [filter, setFilter] = useState&lt;&quot;ALL&quot; | &quot;INCOME&quot; | &quot;EXPENSE&quot;&gt;(&quot;ALL&quot;);
+  const [search, setSearch] = useState(&quot;&quot;);
+
+  const filtered = (transactions ?? []).filter(t =&gt; {
+    const matchesFilter = filter === &quot;ALL&quot; || t.type === filter;
+    const matchesSearch = !search || 
+      t.category.toLowerCase().includes(search.toLowerCase()) ||
+      (t.description ?? &quot;&quot;).toLowerCase().includes(search.toLowerCase());
+    return matchesFilter &amp;&amp; matchesSearch;
+  }).sort((a, b) =&gt; new Date(b.date!).getTime() - new Date(a.date!).getTime());
+
+  const totalIncome = filtered.filter(t =&gt; t.type === &quot;INCOME&quot;).reduce((sum, t) =&gt; sum + Number(t.amount), 0);
+  const totalExpense = filtered.filter(t =&gt; t.type === &quot;EXPENSE&quot;).reduce((sum, t) =&gt; sum + Number(t.amount), 0);
+
+  const formatAmount = (amount: number | string) =&gt;
+    new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(Number(amount));
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 px-4 pt-8&quot;&gt;
+      &lt;PageHeader
+        title=&quot;Transactions&quot;
+        subtitle=&quot;Income &amp; expenses&quot;
+        action={
+          &lt;Button
+            className=&quot;rounded-full w-12 h-12 shadow-lg shadow-primary/25&quot;
+            onClick={() =&gt; { setDefaultType(&quot;EXPENSE&quot;); setOpen(true); }}
+            data-testid=&quot;button-add-transaction&quot;
+          &gt;
+            &lt;Plus className=&quot;w-5 h-5&quot; /&gt;
+          &lt;/Button&gt;
+        }
+      /&gt;
+
+      {/* Filter Bar */}
+      &lt;div className=&quot;flex gap-2 mb-4&quot;&gt;
+        {([&quot;ALL&quot;, &quot;INCOME&quot;, &quot;EXPENSE&quot;] as const).map(f =&gt; (
+          &lt;button
+            key={f}
+            data-testid={`filter-${f.toLowerCase()}`}
+            onClick={() =&gt; setFilter(f)}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              filter === f
+                ? f === &quot;INCOME&quot; ? &quot;bg-green-500/20 text-green-400 border border-green-500/30&quot;
+                  : f === &quot;EXPENSE&quot; ? &quot;bg-red-500/20 text-red-400 border border-red-500/30&quot;
+                  : &quot;bg-primary/20 text-primary border border-primary/30&quot;
+                : &quot;bg-secondary/40 text-muted-foreground border border-white/5&quot;
+            }`}
+          &gt;
+            {f}
+          &lt;/button&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* Search */}
+      &lt;div className=&quot;relative mb-4&quot;&gt;
+        &lt;Search className=&quot;absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground&quot; /&gt;
+        &lt;Input
+          placeholder=&quot;Search transactions...&quot;
+          value={search}
+          onChange={e =&gt; setSearch(e.target.value)}
+          className=&quot;pl-9 bg-background/50 border-white/10&quot;
+          data-testid=&quot;input-search-transactions&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      {/* Summary row */}
+      {filtered.length &gt; 0 &amp;&amp; (
+        &lt;div className=&quot;grid grid-cols-2 gap-2 mb-4&quot;&gt;
+          &lt;div className=&quot;bg-green-500/10 border border-green-500/20 rounded-xl p-3 text-center&quot;&gt;
+            &lt;p className=&quot;text-[10px] text-muted-foreground uppercase&quot;&gt;Income&lt;/p&gt;
+            &lt;p className=&quot;text-sm font-bold text-green-400&quot;&gt;{formatAmount(totalIncome)}&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center&quot;&gt;
+            &lt;p className=&quot;text-[10px] text-muted-foreground uppercase&quot;&gt;Expenses&lt;/p&gt;
+            &lt;p className=&quot;text-sm font-bold text-red-400&quot;&gt;{formatAmount(totalExpense)}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+
+      {/* Quick add buttons */}
+      &lt;div className=&quot;flex gap-2 mb-4&quot;&gt;
+        &lt;button
+          data-testid=&quot;button-add-income&quot;
+          onClick={() =&gt; { setDefaultType(&quot;INCOME&quot;); setOpen(true); }}
+          className=&quot;flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium hover:bg-green-500/20 transition-colors&quot;
+        &gt;
+          &lt;ArrowUpRight className=&quot;w-4 h-4&quot; /&gt; Add Income
+        &lt;/button&gt;
+        &lt;button
+          data-testid=&quot;button-add-expense&quot;
+          onClick={() =&gt; { setDefaultType(&quot;EXPENSE&quot;); setOpen(true); }}
+          className=&quot;flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-colors&quot;
+        &gt;
+          &lt;ArrowDownRight className=&quot;w-4 h-4&quot; /&gt; Add Expense
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      {/* Transaction List */}
+      {isLoading ? (
+        &lt;div className=&quot;space-y-3&quot;&gt;
+          {[1,2,3,4].map(i =&gt; &lt;div key={i} className=&quot;h-16 bg-secondary/30 rounded-2xl animate-pulse&quot; /&gt;)}
+        &lt;/div&gt;
+      ) : (
+        &lt;div className=&quot;space-y-3&quot;&gt;
+          &lt;AnimatePresence&gt;
+            {filtered.map((tx) =&gt; (
+              &lt;motion.div
+                key={tx.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                layout
+              &gt;
+                &lt;Card className=&quot;glass-card hover:bg-card/50 transition-colors group&quot; data-testid={`card-transaction-${tx.id}`}&gt;
+                  &lt;div className=&quot;p-4 flex items-center justify-between&quot;&gt;
+                    &lt;div className=&quot;flex items-center gap-3&quot;&gt;
+                      &lt;div className={`w-9 h-9 rounded-full flex items-center justify-center ${
+                        tx.type === 'INCOME' ? 'bg-green-500/10' : 'bg-red-500/10'
+                      }`}&gt;
+                        {tx.type === 'INCOME'
+                          ? &lt;ArrowUpRight className=&quot;w-4 h-4 text-green-400&quot; /&gt;
+                          : &lt;ArrowDownRight className=&quot;w-4 h-4 text-red-400&quot; /&gt;
+                        }
+                      &lt;/div&gt;
+                      &lt;div&gt;
+                        &lt;p className=&quot;font-semibold text-sm&quot;&gt;{tx.category}&lt;/p&gt;
+                        &lt;p className=&quot;text-xs text-muted-foreground&quot;&gt;
+                          {tx.description || &quot;&quot;}{tx.description &amp;&amp; tx.date ? &quot; · &quot; : &quot;&quot;}
+                          {tx.date ? format(new Date(tx.date), &quot;MMM d, yyyy&quot;) : &quot;&quot;}
+                        &lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;flex items-center gap-2&quot;&gt;
+                      &lt;div className={`text-base font-bold ${tx.type === 'INCOME' ? 'text-green-400' : 'text-red-400'}`}&gt;
+                        {tx.type === 'INCOME' ? '+' : '-'}{formatAmount(tx.amount)}
+                      &lt;/div&gt;
+                      &lt;Button
+                        variant=&quot;ghost&quot;
+                        size=&quot;icon&quot;
+                        className=&quot;h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover:opacity-100 transition-opacity&quot;
+                        onClick={() =&gt; { if(confirm(&quot;Delete this transaction?&quot;)) deleteTransaction(tx.id); }}
+                        data-testid={`button-delete-transaction-${tx.id}`}
+                      &gt;
+                        &lt;Trash2 className=&quot;w-3.5 h-3.5&quot; /&gt;
+                      &lt;/Button&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/Card&gt;
+              &lt;/motion.div&gt;
+            ))}
+          &lt;/AnimatePresence&gt;
+
+          {filtered.length === 0 &amp;&amp; (
+            &lt;div className=&quot;text-center py-12 text-muted-foreground&quot;&gt;
+              &lt;ArrowUpRight className=&quot;w-12 h-12 mx-auto mb-4 opacity-20&quot; /&gt;
+              &lt;p className=&quot;text-sm&quot;&gt;No transactions yet.&lt;/p&gt;
+              &lt;p className=&quot;text-xs mt-1&quot;&gt;Add your first income or expense above.&lt;/p&gt;
+            &lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      )}
+
+      &lt;CreateTransactionDialog
+        open={open}
+        onOpenChange={setOpen}
+        defaultType={defaultType}
+      /&gt;
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f27">
+    <div class="fh">
+      <div class="fp">client/src/pages/Reports.tsx</div>
+      <div class="fm">213 lines · typescript</div>
+      <button class="cb" onclick="cp('f27')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f27-c">import { useDashboard } from &quot;@/hooks/use-dashboard&quot;;
+import { useTransactions } from &quot;@/hooks/use-transactions&quot;;
+import { useAssets } from &quot;@/hooks/use-assets&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { PageHeader } from &quot;@/components/PageHeader&quot;;
+import { Card, CardContent, CardHeader, CardTitle } from &quot;@/components/ui/card&quot;;
+import {
+  PieChart, Pie, Cell, ResponsiveContainer, Tooltip,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend
+} from 'recharts';
+import { Loader2 } from &quot;lucide-react&quot;;
+import { format, startOfMonth, subMonths } from &quot;date-fns&quot;;
+
+const COLORS = ['#10b981', '#ef4444', '#6366f1', '#f59e0b', '#3b82f6', '#ec4899', '#14b8a6', '#f97316'];
+
+export default function Reports() {
+  const { data: dashboard, isLoading: dashLoading } = useDashboard();
+  const { data: transactions, isLoading: txLoading } = useTransactions();
+  const { data: assets, isLoading: assetsLoading } = useAssets();
+
+  if (dashLoading || txLoading || assetsLoading) {
+    return (
+      &lt;div className=&quot;flex h-screen items-center justify-center bg-background&quot;&gt;
+        &lt;Loader2 className=&quot;w-10 h-10 animate-spin text-primary&quot; /&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  const currency = dashboard?.currency || &quot;INR&quot;;
+
+  const fmt = (v: number) =&gt;
+    new Intl.NumberFormat('en-IN', { style: 'currency', currency, maximumFractionDigits: 0 }).format(v);
+
+  // Net worth breakdown
+  const netWorthData = [
+    { name: 'Assets', value: dashboard?.totalAssets ?? 0 },
+    { name: 'Liabilities', value: dashboard?.totalLiabilities ?? 0 },
+  ].filter(d =&gt; d.value &gt; 0);
+
+  // Asset allocation by type
+  const assetByType: Record&lt;string, number&gt; = {};
+  (assets ?? []).forEach(a =&gt; {
+    const type = a.type;
+    assetByType[type] = (assetByType[type] || 0) + Number(a.value);
+  });
+  const assetAllocationData = Object.entries(assetByType).map(([name, value]) =&gt; ({ name, value }));
+
+  // Income vs Expense — last 6 months
+  const now = new Date();
+  const last6Months = Array.from({ length: 6 }, (_, i) =&gt; {
+    const d = subMonths(now, 5 - i);
+    return { month: format(d, 'MMM'), start: startOfMonth(d), label: format(d, 'yyyy-MM') };
+  });
+
+  const incomeExpenseData = last6Months.map(({ month, start, label }) =&gt; {
+    const end = new Date(start);
+    end.setMonth(end.getMonth() + 1);
+    const monthTxs = (transactions ?? []).filter(t =&gt; {
+      if (!t.date) return false;
+      const d = new Date(t.date);
+      return d &gt;= start &amp;&amp; d &lt; end;
+    });
+    return {
+      month,
+      Income: monthTxs.filter(t =&gt; t.type === 'INCOME').reduce((s, t) =&gt; s + Number(t.amount), 0),
+      Expense: monthTxs.filter(t =&gt; t.type === 'EXPENSE').reduce((s, t) =&gt; s + Number(t.amount), 0),
+    };
+  });
+
+  // Expense by category (all time)
+  const expenseByCat: Record&lt;string, number&gt; = {};
+  (transactions ?? []).filter(t =&gt; t.type === 'EXPENSE').forEach(t =&gt; {
+    expenseByCat[t.category] = (expenseByCat[t.category] || 0) + Number(t.amount);
+  });
+  const expenseCatData = Object.entries(expenseByCat)
+    .map(([name, value]) =&gt; ({ name, value }))
+    .sort((a, b) =&gt; b.value - a.value)
+    .slice(0, 8);
+
+  const tooltipStyle = {
+    backgroundColor: 'hsl(224 71% 7%)',
+    borderColor: 'hsl(217 19% 27%)',
+    color: 'hsl(210 40% 98%)',
+    borderRadius: '8px',
+    fontSize: '12px',
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 px-4 pt-8&quot;&gt;
+      &lt;PageHeader title=&quot;Reports&quot; subtitle=&quot;Financial insights&quot; /&gt;
+
+      &lt;div className=&quot;space-y-5&quot;&gt;
+        {/* Net Worth Breakdown */}
+        &lt;Card className=&quot;glass-card&quot;&gt;
+          &lt;CardHeader className=&quot;pb-2&quot;&gt;
+            &lt;CardTitle className=&quot;text-sm font-semibold text-muted-foreground uppercase tracking-wider&quot;&gt;Net Worth Breakdown&lt;/CardTitle&gt;
+          &lt;/CardHeader&gt;
+          &lt;CardContent&gt;
+            {netWorthData.length &gt; 0 ? (
+              &lt;&gt;
+                &lt;div className=&quot;h-52&quot;&gt;
+                  &lt;ResponsiveContainer width=&quot;100%&quot; height=&quot;100%&quot;&gt;
+                    &lt;PieChart&gt;
+                      &lt;Pie data={netWorthData} cx=&quot;50%&quot; cy=&quot;50%&quot; innerRadius={55} outerRadius={80} paddingAngle={4} dataKey=&quot;value&quot; stroke=&quot;none&quot;&gt;
+                        {netWorthData.map((_, i) =&gt; (
+                          &lt;Cell key={i} fill={['#10b981', '#ef4444'][i]} /&gt;
+                        ))}
+                      &lt;/Pie&gt;
+                      &lt;Tooltip formatter={(v) =&gt; fmt(Number(v))} contentStyle={tooltipStyle} itemStyle={{ color: 'hsl(210 40% 98%)' }} /&gt;
+                    &lt;/PieChart&gt;
+                  &lt;/ResponsiveContainer&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;flex justify-center gap-6 text-sm mt-1&quot;&gt;
+                  &lt;div className=&quot;flex items-center gap-2&quot;&gt;&lt;div className=&quot;w-3 h-3 rounded-full bg-emerald-500&quot; /&gt;&lt;span&gt;Assets&lt;/span&gt;&lt;/div&gt;
+                  &lt;div className=&quot;flex items-center gap-2&quot;&gt;&lt;div className=&quot;w-3 h-3 rounded-full bg-red-500&quot; /&gt;&lt;span&gt;Liabilities&lt;/span&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/&gt;
+            ) : (
+              &lt;div className=&quot;h-40 flex items-center justify-center text-muted-foreground text-sm&quot;&gt;No data yet&lt;/div&gt;
+            )}
+          &lt;/CardContent&gt;
+        &lt;/Card&gt;
+
+        {/* Income vs Expense (last 6 months) */}
+        &lt;Card className=&quot;glass-card&quot;&gt;
+          &lt;CardHeader className=&quot;pb-2&quot;&gt;
+            &lt;CardTitle className=&quot;text-sm font-semibold text-muted-foreground uppercase tracking-wider&quot;&gt;Income vs Expense (6 months)&lt;/CardTitle&gt;
+          &lt;/CardHeader&gt;
+          &lt;CardContent&gt;
+            &lt;div className=&quot;h-52&quot;&gt;
+              &lt;ResponsiveContainer width=&quot;100%&quot; height=&quot;100%&quot;&gt;
+                &lt;BarChart data={incomeExpenseData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}&gt;
+                  &lt;CartesianGrid strokeDasharray=&quot;3 3&quot; stroke=&quot;rgba(255,255,255,0.05)&quot; /&gt;
+                  &lt;XAxis dataKey=&quot;month&quot; tick={{ fill: 'hsl(215 20% 65%)', fontSize: 11 }} axisLine={false} tickLine={false} /&gt;
+                  &lt;YAxis tick={{ fill: 'hsl(215 20% 65%)', fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={v =&gt; v &gt;= 1000 ? `${(v/1000).toFixed(0)}k` : String(v)} /&gt;
+                  &lt;Tooltip formatter={(v) =&gt; fmt(Number(v))} contentStyle={tooltipStyle} itemStyle={{ color: 'hsl(210 40% 98%)' }} /&gt;
+                  &lt;Legend wrapperStyle={{ fontSize: '12px', color: 'hsl(215 20% 65%)' }} /&gt;
+                  &lt;Bar dataKey=&quot;Income&quot; fill=&quot;#10b981&quot; radius={[4, 4, 0, 0]} /&gt;
+                  &lt;Bar dataKey=&quot;Expense&quot; fill=&quot;#ef4444&quot; radius={[4, 4, 0, 0]} /&gt;
+                &lt;/BarChart&gt;
+              &lt;/ResponsiveContainer&gt;
+            &lt;/div&gt;
+          &lt;/CardContent&gt;
+        &lt;/Card&gt;
+
+        {/* Asset Allocation */}
+        {assetAllocationData.length &gt; 0 &amp;&amp; (
+          &lt;Card className=&quot;glass-card&quot;&gt;
+            &lt;CardHeader className=&quot;pb-2&quot;&gt;
+              &lt;CardTitle className=&quot;text-sm font-semibold text-muted-foreground uppercase tracking-wider&quot;&gt;Asset Allocation&lt;/CardTitle&gt;
+            &lt;/CardHeader&gt;
+            &lt;CardContent&gt;
+              &lt;div className=&quot;h-52&quot;&gt;
+                &lt;ResponsiveContainer width=&quot;100%&quot; height=&quot;100%&quot;&gt;
+                  &lt;PieChart&gt;
+                    &lt;Pie data={assetAllocationData} cx=&quot;50%&quot; cy=&quot;50%&quot; innerRadius={50} outerRadius={75} paddingAngle={3} dataKey=&quot;value&quot; stroke=&quot;none&quot;&gt;
+                      {assetAllocationData.map((_, i) =&gt; (
+                        &lt;Cell key={i} fill={COLORS[i % COLORS.length]} /&gt;
+                      ))}
+                    &lt;/Pie&gt;
+                    &lt;Tooltip formatter={(v) =&gt; fmt(Number(v))} contentStyle={tooltipStyle} itemStyle={{ color: 'hsl(210 40% 98%)' }} /&gt;
+                  &lt;/PieChart&gt;
+                &lt;/ResponsiveContainer&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-wrap justify-center gap-3 text-xs mt-1&quot;&gt;
+                {assetAllocationData.map((d, i) =&gt; (
+                  &lt;div key={d.name} className=&quot;flex items-center gap-1.5&quot;&gt;
+                    &lt;div className=&quot;w-2.5 h-2.5 rounded-full&quot; style={{ backgroundColor: COLORS[i % COLORS.length] }} /&gt;
+                    &lt;span className=&quot;text-muted-foreground&quot;&gt;{d.name}&lt;/span&gt;
+                  &lt;/div&gt;
+                ))}
+              &lt;/div&gt;
+            &lt;/CardContent&gt;
+          &lt;/Card&gt;
+        )}
+
+        {/* Expense by Category */}
+        {expenseCatData.length &gt; 0 &amp;&amp; (
+          &lt;Card className=&quot;glass-card&quot;&gt;
+            &lt;CardHeader className=&quot;pb-2&quot;&gt;
+              &lt;CardTitle className=&quot;text-sm font-semibold text-muted-foreground uppercase tracking-wider&quot;&gt;Expense by Category&lt;/CardTitle&gt;
+            &lt;/CardHeader&gt;
+            &lt;CardContent&gt;
+              &lt;div className=&quot;space-y-3&quot;&gt;
+                {expenseCatData.map((d, i) =&gt; {
+                  const total = expenseCatData.reduce((s, x) =&gt; s + x.value, 0);
+                  const pct = total &gt; 0 ? (d.value / total) * 100 : 0;
+                  return (
+                    &lt;div key={d.name}&gt;
+                      &lt;div className=&quot;flex justify-between text-xs mb-1&quot;&gt;
+                        &lt;span className=&quot;font-medium&quot;&gt;{d.name}&lt;/span&gt;
+                        &lt;span className=&quot;text-muted-foreground&quot;&gt;{fmt(d.value)} ({pct.toFixed(1)}%)&lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div className=&quot;h-1.5 bg-secondary rounded-full overflow-hidden&quot;&gt;
+                        &lt;div
+                          className=&quot;h-full rounded-full transition-all&quot;
+                          style={{ width: `${pct}%`, backgroundColor: COLORS[i % COLORS.length] }}
+                        /&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  );
+                })}
+              &lt;/div&gt;
+            &lt;/CardContent&gt;
+          &lt;/Card&gt;
+        )}
+      &lt;/div&gt;
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    <section class="fs" id="f28">
+    <div class="fh">
+      <div class="fp">client/src/pages/Settings.tsx</div>
+      <div class="fm">120 lines · typescript</div>
+      <button class="cb" onclick="cp('f28')">Copy</button>
+    </div>
+    <div class="cb-wrap"><pre class="pre"><code id="f28-c">import { useState } from &quot;react&quot;;
+import { BottomNav } from &quot;@/components/BottomNav&quot;;
+import { PageHeader } from &quot;@/components/PageHeader&quot;;
+import { useAuth } from &quot;@/hooks/use-auth&quot;;
+import { Button } from &quot;@/components/ui/button&quot;;
+import { Card } from &quot;@/components/ui/card&quot;;
+import { LogOut, Globe, ChevronRight, BarChart2, User } from &quot;lucide-react&quot;;
+import { Link } from &quot;wouter&quot;;
+import { useToast } from &quot;@/hooks/use-toast&quot;;
+
+export default function Settings() {
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
+  const [currency, setCurrency] = useState(user?.preferredCurrency || &quot;INR&quot;);
+
+  const currencies = [
+    { code: &quot;INR&quot;, symbol: &quot;₹&quot;, label: &quot;Indian Rupee&quot; },
+    { code: &quot;AED&quot;, symbol: &quot;د.إ&quot;, label: &quot;UAE Dirham&quot; },
+    { code: &quot;USD&quot;, symbol: &quot;$&quot;, label: &quot;US Dollar&quot; },
+  ];
+
+  const handleCurrencyChange = async (code: string) =&gt; {
+    setCurrency(code);
+    try {
+      const res = await fetch(&quot;/api/user/currency&quot;, {
+        method: &quot;PATCH&quot;,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+        credentials: &quot;include&quot;,
+        body: JSON.stringify({ currency: code }),
+      });
+      if (res.ok) {
+        toast({ title: &quot;Currency updated&quot;, description: `Now using ${code}` });
+      }
+    } catch {
+      toast({ title: &quot;Failed to update currency&quot;, variant: &quot;destructive&quot; });
+    }
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-background pb-24 px-4 pt-8&quot;&gt;
+      &lt;PageHeader title=&quot;Settings&quot; /&gt;
+
+      &lt;div className=&quot;space-y-5&quot;&gt;
+        {/* Profile Card */}
+        &lt;Card className=&quot;glass-card p-4 flex items-center gap-4&quot;&gt;
+          &lt;div className=&quot;w-14 h-14 rounded-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center text-primary text-2xl font-bold border border-primary/20&quot;&gt;
+            {user?.name?.[0]?.toUpperCase()}
+          &lt;/div&gt;
+          &lt;div className=&quot;flex-1 min-w-0&quot;&gt;
+            &lt;h3 className=&quot;font-bold text-lg truncate&quot;&gt;{user?.name}&lt;/h3&gt;
+            &lt;p className=&quot;text-sm text-muted-foreground truncate&quot;&gt;{user?.username}&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;User className=&quot;w-5 h-5 text-muted-foreground&quot; /&gt;
+        &lt;/Card&gt;
+
+        {/* Currency Selection */}
+        &lt;div className=&quot;space-y-2&quot;&gt;
+          &lt;h4 className=&quot;text-xs uppercase text-muted-foreground font-semibold ml-2 tracking-wider&quot;&gt;Currency&lt;/h4&gt;
+          &lt;div className=&quot;rounded-2xl bg-card border border-white/5 overflow-hidden divide-y divide-white/5&quot;&gt;
+            {currencies.map(c =&gt; (
+              &lt;button
+                key={c.code}
+                data-testid={`button-currency-${c.code.toLowerCase()}`}
+                onClick={() =&gt; handleCurrencyChange(c.code)}
+                className={`w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors text-left ${currency === c.code ? 'bg-primary/5' : ''}`}
+              &gt;
+                &lt;div className=&quot;flex items-center gap-3&quot;&gt;
+                  &lt;div className=&quot;w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-sm font-bold&quot;&gt;
+                    {c.symbol}
+                  &lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;p className=&quot;text-sm font-medium&quot;&gt;{c.code}&lt;/p&gt;
+                    &lt;p className=&quot;text-xs text-muted-foreground&quot;&gt;{c.label}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                {currency === c.code &amp;&amp; (
+                  &lt;div className=&quot;w-2 h-2 rounded-full bg-primary&quot; /&gt;
+                )}
+              &lt;/button&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Links */}
+        &lt;div className=&quot;space-y-2&quot;&gt;
+          &lt;h4 className=&quot;text-xs uppercase text-muted-foreground font-semibold ml-2 tracking-wider&quot;&gt;More&lt;/h4&gt;
+          &lt;div className=&quot;rounded-2xl bg-card border border-white/5 overflow-hidden&quot;&gt;
+            &lt;Link href=&quot;/reports&quot;&gt;
+              &lt;button className=&quot;w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors text-left&quot;&gt;
+                &lt;div className=&quot;flex items-center gap-3&quot;&gt;
+                  &lt;BarChart2 className=&quot;w-5 h-5 text-primary&quot; /&gt;
+                  &lt;span className=&quot;text-sm font-medium&quot;&gt;Reports &amp; Charts&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;ChevronRight className=&quot;w-4 h-4 text-muted-foreground&quot; /&gt;
+              &lt;/button&gt;
+            &lt;/Link&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Sign Out */}
+        &lt;div className=&quot;pt-2&quot;&gt;
+          &lt;Button
+            variant=&quot;destructive&quot;
+            className=&quot;w-full h-12 rounded-xl font-semibold&quot;
+            onClick={() =&gt; logout()}
+            data-testid=&quot;button-sign-out&quot;
+          &gt;
+            &lt;LogOut className=&quot;w-4 h-4 mr-2&quot; /&gt;
+            Sign Out
+          &lt;/Button&gt;
+        &lt;/div&gt;
+
+        &lt;p className=&quot;text-center text-xs text-muted-foreground/50 pb-2&quot;&gt;NetWorth · Manage your wealth&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;BottomNav /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div>
+    </section>
+    </div>
+    <script>
+    document.querySelectorAll('.pre code').forEach(code=>{
+    const lines=code.innerHTML.split('\n');
+    code.innerHTML=lines.map(l=>'<span class="ln">'+(l||' ')+'</span>').join('\n');
+    });
+    const secs=document.querySelectorAll('.fs');
+    const nis=document.querySelectorAll('.ni');
+    new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        nis.forEach(a=>a.classList.remove('active'));
+        const a=document.querySelector('.ni[data-id="'+e.target.id+'"]');
+        if(a){a.classList.add('active');a.scrollIntoView({block:'nearest'});}
+      }
+    });
+    },{threshold:.1,rootMargin:'-5% 0px -85% 0px'}).observe&&secs.forEach(s=>new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){nis.forEach(a=>a.classList.remove('active'));const a=document.querySelector('.ni[data-id="'+e.target.id+'"]');if(a){a.classList.add('active');a.scrollIntoView({block:'nearest'});}}});
+    },{threshold:.1,rootMargin:'-5% 0px -85% 0px'}).observe(s));
+    function flt(q){
+    q=q.toLowerCase();
+    document.querySelectorAll('.ni').forEach(a=>{a.style.display=a.textContent.toLowerCase().includes(q)?'':'none';});
+    document.querySelectorAll('.ng').forEach(g=>{g.style.display=[...g.querySelectorAll('.ni')].some(a=>a.style.display!=='none')?'':'none';});
+    }
+    function cp(id){
+    const el=document.getElementById(id+'-c');
+    navigator.clipboard.writeText(el.innerText).then(()=>{
+      const b=document.querySelector('[onclick="cp(\''+id+'\')"]');
+      if(b){b.textContent='Copied!';b.classList.add('ok');setTimeout(()=>{b.textContent='Copy';b.classList.remove('ok');},2000);}
+    });
+    }
+    </script>
+    </body>
+    </html>
